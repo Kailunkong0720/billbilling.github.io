@@ -1,0 +1,127 @@
+/*@import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");*/
+
+body {
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+}
+.nav-item {
+	color: black;
+	text-decoration: none;}
+
+	html, body {
+		width: 100%;
+		height: 100%;
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+	  }
+	  
+/*	  main {
+		width: 800px; /* 設置寬度，可以根據需要調整 
+		height: 180px; /* 設置高度，可以根據需要調整 
+		margin: auto;
+		background-color: #59b1af; /* 設置頁面的背景色，可選 
+		bottom: 0;
+	  }*/
+	  
+
+a {
+	text-decoration: none;
+	font-family: Roboto, sans-serif;
+	font-size: 1em;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	transition-duration: 0.2s;
+	align-items: center;
+	padding: 1rem 1.5rem;
+	
+}
+
+.menu a span {
+    display: none;
+    font-size: 1rem;
+  }
+  
+  .menu a:hover {
+    color: #3498db;
+  }
+
+img {
+	transition-duration: 0.2s;
+}
+
+a:hover img {
+	animation: left-edge 0.5s linear 1;
+	filter: invert(72%) sepia(20%) saturate(747%) hue-rotate(174deg)
+		brightness(96%) contrast(97%);
+}
+
+
+
+
+
+
+/* Your existing CSS */
+
+
+
+.menu {
+    display: flex;
+    justify-content: center; /* Center the menu horizontally */
+    align-items: center;
+    position:fixed; /* Keep it fixed at the bottom */
+    bottom: 0;
+    left: 0;
+    right: 0; /* Set right to 0 to span the entire width */
+    height: 60px;
+    padding: 0 15px;
+    background: rgb(229, 155, 155);
+    box-shadow: 0px -4px 4px rgba(1, 1, 1, 0.1);
+    width: auto; /* Make the menu full-width */
+}
+
+
+
+
+/* Add media query for mobile devices */
+
+    /* You can add more styles as needed for mobile devices */
+
+
+.dot {
+	animation: dot-anim 8s linear infinite;
+}
+
+/* Animations */
+
+@keyframes dot-anim {
+	0% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.5);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+@keyframes left-edge {
+	0% {
+		transform: rotate(0deg);
+	}
+	35% {
+		transform: rotate(-25deg);
+	}
+	75% {
+		transform: rotate(25deg);
+	}
+	100% {
+		transform: rotate(0deg);
+	}
+}
