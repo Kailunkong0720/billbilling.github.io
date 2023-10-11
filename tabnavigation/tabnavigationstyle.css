@@ -128,22 +128,16 @@ a:hover img {
 		transform: rotate(0deg);
 	}
 }
-@media (min-width: 320px) and (max-width: 525px){
-  .Gool{
-    /*background-color: orange;*/
-    margin-right: 3%;
-    margin-left: 3%;
-    margin-bottom: 50px;
-  }
-  #copyright{
-    padding: 0 3%;
-  }
-}
 
 @media (min-width: 0px) and (max-width: 540px){
 	main,.menu{
 		left: 0;
 		width: 100%;
+		word-break: break-all;
+		text-align: center;
+	}
+	.two-word{
+		white-space:nowrap;
 	}
 	.menu{
 		height: 75px;
@@ -152,8 +146,13 @@ a:hover img {
   }
   @media (min-width: 541px) and (max-width: 950px){
 	main,.menu{
-	  left: 15%;
-	  width: 70%;
+		left: 15%;
+		width: 70%;
+		word-break:break-all;
+		text-align: center;
+	}
+	.two-word{
+		white-space:nowrap;
 	}
 	.menu{
 		height: 73px;
