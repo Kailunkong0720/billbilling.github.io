@@ -140,20 +140,18 @@ a:hover img {
   }
 }
 
-@media (min-width: 300px) and (max-width: 540px){
+@media (min-width: 0px) and (max-width: 540px){
 	main,.menu{
-	  /*background-color: orange;*/
-	  left: 12.5%;
-	  width: 75%;
+		left: 0;
+		width: 100%;
 	}
 	.menu{
 		height: 75px;
 	}
 	
   }
-  @media (min-width: 541px) and (max-width: 991px){
+  @media (min-width: 541px) and (max-width: 950px){
 	main,.menu{
-	  /*background-color: orange;*/
 	  left: 15%;
 	  width: 70%;
 	}
