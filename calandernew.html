@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="./tabnavigationstyle.css">
     <title>可点击日期的日历</title>
     <style>
         body {
@@ -92,7 +95,38 @@
         <div class="calendar-body" id="calendarBody">
         </div>
     </div>
-
+    <main>
+        <!-- Background -->
+        
+    
+        <!-- Nav -->
+        <nav class="menu">
+		
+            <a class="nav-item" style="padding: 1rem 1.5rem 1rem .5rem;" href="../calandernew.html">
+                <img src="img/calender.svg" width="28px" height="28px" />			
+                每日記賬
+            </a>
+            <a class="nav-item" href="overview/overview.css">
+                <img src="img/person.svg" width="28px" height="28px" />
+                總覽
+    
+            </a>
+            <a class="nav-item" href="../expenses.html">
+                <img src="img/duplicate.svg" width="28px" height="28px" />
+                新增賬單
+            </a>
+            <a class="nav-item" href="#">
+                <img src="img/analysis.svg" width="28px" height="28px" />
+                項目分析
+            </a>
+            <a class="nav-item" style="padding: 1rem .5rem 1rem 1.5rem;" href="#">
+                <img src="img/setting.svg" width="28px" height="28px" />
+                設定
+            </a>
+        </nav>
+        
+    </main>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
     <script>
         const calendarBody = document.getElementById("calendarBody");
         const selectYear = document.getElementById("selectYear");
