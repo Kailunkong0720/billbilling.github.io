@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>可点击日期的日历</title>
+    <style>
+        body {
+            display: flex;
+            
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column; /* 将内容垂直居中 */
+        }
+
+        .calendar {
+            width: 300px;
+            border: 1px solid #ccc;
+            font-family: Arial, sans-serif;
+        }
+
+        .calendar-header {
+            background-color: #007BFF;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .calendar-header select {
+            padding: 5px;
+        }
+
+        .calendar-body {
+            text-align: center;
+        }
+
+        .calendar-day {
+            width: 40px;
+            height: 40px;
+            display: inline-block;
+            line-height: 40px;
+            cursor: pointer;
+        }
+
+        .calendar-day:hover {
+            background-color: #f2f2f2;
+        }
+
+        .selected-day {
+            background-color: blue;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .current-day {
+            background-color: rgb(223, 66, 35); /* 当天日期为黄色 */
+            color: #58c1cd;
+            cursor: pointer;
+        }
+
+        .clicked-day {
+            background-color: blue; /* 被点击的日期为蓝色 */
+            color: #db5050;
+            cursor: pointer;
+        }
+
+        #selectedDate {
+            text-align: center;
+            font-weight: bold;
+            padding: 10px;
+        }
+        
+            .calendar-day:hover {
+            background-color: blue;
+        }
+
+
+        
+    </style>
+</head>
+<body>
+   <h3></h3>
+    <div class="calendar">
+        <div id="selectedDate">Selected Date: </div>
+        <div class="calendar-header">
+            <button id="prevMonth">上一个月</button>
+            <select id="selectYear"></select>
+            <select id="selectMonth"></select>
+            <button id="nextMonth">下一个月</button>
+        </div>
+        <div class="calendar-body" id="calendarBody">
+        </div>
+    </div>
+
+    <script>
+        const calendarBody = document.getElementById("calendarBody");
+        const selectYear = document.getElementById("selectYear");
+        const selectMonth = document.getElementById("selectMonth");
+        const selectedDateElement = document.getElementById("selectedDate");
+        const prevMonthButton = document.getElementById("prevMonth");
+        const nextMonthButton = document.getElementById("nextMonth");
+
+        let currentDate = new Date();
+        let currentMonth = currentDate.getMonth();
+        let currentYear = currentDate.getFullYear();
+
+        // Populate year and month select boxes
+        for (let year = 2000; year <= 2030; year++) {
+            const option = document.createElement("option");
+            option.value = year;
+            option.textContent = year;
+            selectYear.appendChild(option);
+        }
+
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        for (let month = 0; month < 12; month++) {
+            const option = document.createElement("option");
+            option.value = month;
+            option.textContent = monthNames[month];
+            selectMonth.appendChild(option);
+        }
+
+        selectYear.value = currentYear;
+        selectMonth.value = currentMonth;
+
+        function renderCalendar() {
+ currentYear = parseInt(selectYear.value);
+            currentMonth = parseInt(selectMonth.value);
+
+            currentDate = new Date(currentYear, currentMonth, 1);
+            selectYear.value = currentYear;
+            selectMonth.value = currentMonth;
+
+            calendarBody.innerHTML = "";
+            while (currentDate.getMonth() === currentMonth) {
+                const day = currentDate.getDate();
+                const dayElement = document.createElement("div");
+                dayElement.classList.add("calendar-day");
+                dayElement.textContent = day;
+
+                if (currentDate.toDateString() === new Date().toDateString()) {
+                    dayElement.classList.add("current-day");
+                    selectedDateElement.textContent = "Selected Date: " + currentYear + '-' + (currentMonth + 1) + '-' + day;
+                }
+
+                dayElement.addEventListener("click", () => {
+                    selectedDateElement.textContent = "Selected Date: " + currentYear + '-' + (currentMonth + 1) + '-' + day;
+                    if (selectedDateElement.previousSelectedDateElement) {
+                        selectedDateElement.previousSelectedDateElement.classList.remove("clicked-day");
+                    }
+                    dayElement.classList.add("clicked-day");
+                    selectedDateElement.previousSelectedDateElement = dayElement;
+                });
+
+                calendarBody.appendChild(dayElement);
+                currentDate.setDate(day + 1);
+            }
+    // 渲染星期几
+    const weekdays = ["", "", "", "", "", "", ""];
+    for (const weekday of weekdays) {
+        const weekdayElement = document.createElement("div");
+        weekdayElement.classList.add("calendar-day");
+        weekdayElement.textContent = weekday;
+        calendarBody.appendChild(weekdayElement);
+    }
+
+    while (currentDate.getMonth() === currentMonth) {
+        const day = currentDate.getDate();
+        const dayElement = document.createElement("div");
+        dayElement.classList.add("calendar-day");
+        dayElement.textContent = day;
+
+        if (currentDate.toDateString() === new Date().toDateString()) {
+            dayElement.classList.add("current-day");
+            selectedDateElement.textContent = "Selected Date: " + currentYear + '-' + (currentMonth + 1) + '-' + day;
+        }
+
+        dayElement.addEventListener("click", () => {
+            selectedDateElement.textContent = "Selected Date: " + currentYear + '-' + (currentMonth + 1) + '-' + day;
+            if (selectedDateElement.previousSelectedDateElement) {
+                selectedDateElement.previousSelectedDateElement.classList.remove("clicked-day");
+            }
+            dayElement.classList.add("clicked-day");
+            selectedDateElement.previousSelectedDateElement = dayElement;
+        });
+
+        calendarBody.appendChild(dayElement);
+        currentDate.setDate(day + 1);
+    }
+}
+
+        prevMonthButton.addEventListener("click", () => {
+            const selectedMonth = parseInt(selectMonth.value);
+            if (selectedMonth > 0) {
+                selectMonth.value = (selectedMonth - 1).toString();
+            } else {
+                selectMonth.value = "11";
+                selectYear.value = (currentYear - 1).toString();
+            }
+            renderCalendar();
+        });
+
+        nextMonthButton.addEventListener("click", () => {
+            const selectedMonth = parseInt(selectMonth.value);
+            if (selectedMonth < 11) {
+                selectMonth.value = (selectedMonth + 1).toString();
+            } else {
+                selectMonth.value = "0";
+                selectYear.value = (currentYear + 1).toString();
+            }
+            renderCalendar();
+        });
+
+        selectYear.addEventListener("change", renderCalendar);
+        selectMonth.addEventListener("change", renderCalendar);
+
+        renderCalendar();
+    </script>
+</body>
+</html>
