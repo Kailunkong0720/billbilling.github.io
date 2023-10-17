@@ -5,44 +5,51 @@
 
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head><meta charset="utf-8" /><title>
-
-</title>    
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>CodePen - Simple Navbar</title>
+  <link rel="stylesheet" href="./overview.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+   
    
     <style type="text/css">
         .auto-style3 {
-            width: 329px;
-            height: 487px;
+			position: relative;
+			left: 400px;
+            width: 400px;
+            height: 200px;
         }
         .auto-style10 {
-            width: 481px;
-            height: 60px;
+            width: 400px;
+            height: 50px;
             background-color: #FFFFCC;
         }
         .auto-style13 {
-            width: 481px;
-            height: 61px;
+            width: 400px;
+            height: 50px;
             background-color: #FFFFCC;
         }
         .auto-style14 {
             width: 200px;
         }
         .auto-style15 {
-            width: 481px;
-            height: 61px;
+            width: 400px;
+            height: 50px;
             text-align: left;
             background-color: #FFFFCC;
         }
         .auto-style16 {
-            width: 481px;
-            height: 60px;
+            width: 400px;
+            height: 50px;
             background-color: #FFFFCC;
             text-align: left;
         }
     </style>
-   
 </head>
-    <body style="z-index: 1; left: 460px; top: 60px; position: absolute; height: 490px; width: 330px; text-align: center">
+
+    <body style="z-index: 1;text-align: center">
     <form method="post" action="./expenses.aspx" id="form1">
 <div class="aspNetHidden">
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKLTc3NDI2NDUzNmRkQZCWRCi8nrd32Jeo3ttEP9EjJwCD6KmYje4Kw1Da3BQ=" />
@@ -194,5 +201,43 @@
                 </tr>
             </table>
         </form>
+		<main>
+			<!-- Background -->
+			<br>
+			<canvas id="myPieChart" width="400" height="400"></canvas>
+			<div id="detail">
+				<br>
+			</div>
+			<!-- Nav -->
+			<nav class="menu">
+				
+				<a class="nav-item" style="padding: 1rem 1.5rem 1rem .5rem;" href="calandernew.html">
+					<img src="overview/img/calender.svg" width="28px" height="28px" />			
+					每日記賬
+				</a>
+				<a class="nav-item" href="overview/overview.css">
+					<img src="overview/img/person.svg" width="28px" height="28px" />
+					總覽
+		
+				</a>
+				<a class="nav-item" href="expenses.html">
+					<img src="overview/img/duplicate.svg" width="28px" height="28px" />
+					新增賬單
+				</a>
+				<a class="nav-item" href="#">
+					<img src="overview/img/analysis.svg" width="28px" height="28px" />
+					項目分析
+				</a>
+				<a class="nav-item" style="padding: 1rem .5rem 1rem 1.5rem;" href="#">
+					<img src="overview/img/setting.svg" width="28px" height="28px" />
+					設定
+				</a>
+			</nav>
+			
+		</main>
+		<!-- partial -->
+		  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
 </body>
+
+
 </html>
