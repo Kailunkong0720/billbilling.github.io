@@ -20,7 +20,7 @@
 	<!-- Nav -->
 	<nav class="menu">
 		
-		<a class="nav-item" style="padding: 1rem 1.5rem 1rem .5rem;" href="billbilling.github.io/calandernew.html">
+		<a class="nav-item" style="padding: 1rem 1.5rem 1rem .5rem;" href="../calandernew.html">
 			<img src="img/calender.svg" width="28px" height="28px" />			
 			每日記賬
 		</a>
@@ -75,6 +75,15 @@
                             const currentValue = dataset.data[tooltipItem.index];
                             const percentage = Math.round((currentValue / total) * 100);
                             return `${data.labels[tooltipItem.index]}: ${percentage}%`;
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: {
+                            font: {
+                                size: 20 // 修改字体大小
+                            }
                         }
                     }
                 }
