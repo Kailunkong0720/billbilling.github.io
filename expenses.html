@@ -19,12 +19,12 @@
         }
         .auto-style10 {
             width: 400px;
-            height: 50px;
+            height: 40px;
             background-color: #FFFFCC;
         }
         .auto-style13 {
             width: 400px;
-            height: 50px;
+            height: 40px;
             background-color: #FFFFCC;
         }
         .auto-style14 {
@@ -32,17 +32,34 @@
         }
         .auto-style15 {
             width: 400px;
-            height: 50px;
+            height: 40px;
             text-align: left;
             background-color: #FFFFCC;
         }
         .auto-style16 {
             width: 400px;
-            height: 50px;
+            height: 40px;
             background-color: #FFFFCC;
             text-align: left;
         }
+		dialog{
+			border: none;
+			box-shadow: 0 2px 6px #ccc;
+			border-radius: 10px;
+		}
+		dialog::backdrop {
+			background-color: rgba(0, 0, 0, 0.1);
+		}
+		.bill{		
+			position: relative;
+			left: 550px;
+			width: 400px;
+			height: 200px;
+			text-align: left;
+			color: rgb(10, 77, 125);
+		}
     </style>
+	
 </head>
 
     <body style="z-index: 1;text-align: center">
@@ -65,12 +82,13 @@
                 </tr>
                 <tr>
                     <td class="auto-style16" style="border-style: double">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 金額
-        <input name="money_text" type="text" id="money_text" style="width:200px;" />
+        <input name="money_text" type="text" id="money_text" style="width:200px;" min="0"/>
                     </td>
                 </tr>
                 <tr>
                     <td class="auto-style16" style="border-style: double">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 名稱
-        <input name="name_text" type="text" id="name_text" style="width:200px;" />
+        <input name="name_text" type="text" id="name_text" style="width:200px;" />	
+		</button>
                     </td>
                 </tr>
                 <tr>
@@ -83,6 +101,15 @@
 	<option value="早餐">早餐</option>
 
 </select>
+		<input type="button" id="show" value="新增類別">
+		<dialog id="infoModal">
+  		<p>	
+			類別-1: <input id=item1_Text value="">
+			類別-2: <input id=item2_Text value="">
+			<input type="button" value="新增" onclick="addOption(type_list1,item1_Text.value, item1_Text.value),addOption(type_list2,item2_Text.value, item2_Text.value)">
+		</p>
+  		<input type="button" id="close" value="關閉">
+		</dialog>
                     </td>
                 </tr>
                 <tr>
@@ -189,10 +216,15 @@
 </select>
                     </td>
                 </tr>
+				<tr>
+					<td class="auto-style16" style="border-style: double">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 附件:
+						<input type="file" id="profile_pic" name="profile_pic" accept=".jpg, .jpeg, .png"><br>
+					</td>
+				</tr>
                 <tr>
                     <td class="auto-style13" style="border-style: double">
-        <input type="button" name="Button3" value="新增" id="Button3" style="width:100px;" />
-        <input type="button" name="Button4" value="重置" id="Button4" style="width:100px;" />
+        <input type="submit" value="新增"  style="width:100px;" />
+        <input type="reset"  value="重置"  style="width:100px;" />
                     </td>
                 </tr>
             </table>
@@ -232,7 +264,47 @@
 			
 		</main>
 		<!-- partial -->
-		  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+		<script>
+			let btn=document.querySelector("#show");
+			let infoModal=document.querySelector("#infoModal");
+			let close=document.querySelector("#close");
+			btn.addEventListener("click", function(){
+			  infoModal.showModal();
+			})
+			close.addEventListener("click", function(){
+			  infoModal.close();
+			})
+			//add droplist item
+			function addOption(list, text, value){
+			var index=list.options.length;
+			list.options[index]=new Option(text, value);
+			list.selectedIndex=index;
+			}
+			//顯示帳單
+			const form = document.getElementById('form1')		
+			form.addEventListener('submit', () => {		
+				let money = document.getElementById('money_text').value
+				let name = document.getElementById('name_text').value
+				let type_list1 = document.getElementById('type_list1').value
+				let type_list2 = document.getElementById('type_list2').value
+				let store = document.getElementById('store_text').value
+				let date = document.getElementById('date_picker').value
+				let time_list1 = document.getElementById('time_list1').value
+				let time_list2 = document.getElementById('time_list2').value
+				let file = document.getElementById('profile_pic').value		
+				event.preventDefault() 
+				form.innerHTML = `<h3 class="bill">
+					金額:${money}</br>
+					名稱:${name}</br>
+					類別:${type_list1} ${type_list2}</br>
+					商家:${store}</br>
+					日期:${date}</br>
+					時間:${time_list1} ${time_list2}</br>
+					附件:${file}</br>
+				</h3>`
+			})
+		</script>
 </body>
 
 
