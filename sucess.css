@@ -1,0 +1,233 @@
+body {
+    text-align: center;   
+           
+    width: 600px;
+    height: 500px;
+    /*box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, 
+                  rgba(0, 0, 0, 0.12) 0px -12px 30px, 
+                  rgba(0, 0, 0, 0.12) 0px 4px 6px, 
+                  rgba(0, 0, 0, 0.17) 0px 12px 13px, 
+                  rgba(0, 0, 0, 0.09) 0px -3px 5px;*/
+   border-radius: 32px;
+    padding: 0;
+    margin: auto;
+    position: center;
+}
+
+table {
+    border-collapse: collapse;
+    width: 500px;
+    margin: 0 auto; /* 居中对齐 */
+    /*border: none; /* 移除表格边框 */
+}
+
+th, td {
+    border: 2px solid #ccc; /* 增加边框宽度 */
+    text-align: center;
+    padding: 15px; /* 增大格子大小 */
+    border: none; /* 移除表格边框 */
+    
+}
+
+th {
+    background-color: #333;
+    color: #fff;
+}
+
+.weekdays th {
+    height: 30px;
+}
+
+.today {
+    background-color: yellow;
+
+}
+
+.selected {
+    background-color: blue;
+    color: white;
+ 
+
+}
+
+label {
+    font-weight: bold;
+}
+
+select {
+    padding: 5px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+/* 新的日期显示样式 */
+#dateDisplay {
+    margin: 20px;
+    font-size: 24px;
+}
+
+.button-25 {
+background-color: transparent;
+background-image: linear-gradient(#5172ff, #003dff);
+border: 0 solid #003dff;
+border-radius: 9999px;
+box-shadow: rgba(37, 44, 97, .15) 0 4px 11px 0, rgba(93, 100, 148, .2) 0 1px 3px 0;
+box-sizing: border-box;
+color: #fff;
+cursor: pointer;
+display: inline-block;
+font-family: Hind, system-ui, BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+font-weight: 600;
+margin: 4px;
+padding: 16px 24px;
+text-align: center;
+text-decoration: inherit;
+text-wrap: nowrap;
+transition: all .2s ease-out;
+/* transition-behavior: normal;*/
+white-space-collapse: collapse;
+line-height: 1.15;
+}
+
+@media (min-width: 576px) {
+.button-25 {
+padding-bottom: 10px;
+padding-top: 10px;
+}
+}
+
+.button-25:after, .button-25:before, .div-flex-items-center-justify-center:after, .div-flex-items-center-justify-center:before, .span-flex-items-center-h-16-w-auto-mr-8-py-2-flex-grow-0-flex-shrink-0-fill-current:after, .span-flex-items-center-h-16-w-auto-mr-8-py-2-flex-grow-0-flex-shrink-0-fill-current:before, .svg-block-h-full:after, .svg-block-h-full:before {
+border: 0 solid #003dff;
+box-sizing: border-box;
+}
+
+.button-25:hover {
+box-shadow: rgba(37, 44, 97, .15) 0 8px 22px 0, rgba(93, 100, 148, .2) 0 4px 6px 0;
+}
+
+.button-25:disabled {
+cursor: not-allowed;
+opacity: .5;
+}
+
+/*heADER*/
+header {
+background-color: #fff;
+display: flex;
+height: 58px;
+justify-content: space-between;
+overflow: hidden;
+position: relative;
+}
+
+.header__btn {
+background-color: #86D8C9;
+border: 2px solid #fff;
+border-radius: 50%;
+-moz-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+-webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+cursor: pointer;
+height: 80px;
+padding-top: 18px;
+position: absolute;
+top: -25px;
+width: 80px;
+}
+.header__btn:hover, .header__btn:focus {
+background: #67cebb;
+transition: all 0.3s ease-in;
+outline: none;
+}
+.header__btn .icon {
+display: inline-block;
+}
+.header__btn--left {
+left: -25px;
+padding-left: 38px;
+text-align: left;
+}
+.header__btn--right {
+padding-right: 32px;
+right: -25px;
+text-align: right;
+}
+
+.main-container-wrapper {
+background-color: #ffffff;
+min-width: 500px;
+min-height: 768px;
+max-width: 550px;
+overflow-y: auto;
+}
+@media (min-width: 415px) {
+.main-container-wrapper {
+-moz-box-shadow: 0px 32px 47px rgba(32, 23, 23, 0.09);
+-webkit-box-shadow: 0px 32px 47px rgba(32, 23, 23, 0.09);
+box-shadow: 0px 32px 47px rgba(32, 23, 23, 0.09);
+margin: 24px auto;
+}
+}
+
+
+.calendar-container {
+background-color: #fff;
+padding: 16px;
+margin-bottom: 24px;
+}
+.calendar-container__header {
+display: flex;
+justify-content: space-between;
+}
+.calendar-container__btn {
+background: transparent;
+border: 0;
+cursor: pointer;
+font-size: 16px;
+outline: none;
+color: #E9E8E8;
+}
+.calendar-container__btn:hover, .calendar-container__btn:focus {
+color: #9FAAB7;
+transition: all 0.3s ease-in;
+}
+.calendar-container__title {
+color: #222741;
+font-size: 20px;
+font-weight: 700;
+}
+
+.calendar-table {
+margin-top: 12px;
+width: 100%;
+}
+.calendar-table__item {
+border: 2px solid transparent;
+border-radius: 50%;
+color: #424588;
+font-size: 12px;
+font-weight: 700;
+width: 100%;
+height: 100%;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+}
+.calendar-table__item:hover {
+background: #f8fafa;
+-moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+-webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+transition: 0.2s all ease-in;
+}
+.calendar-table__row {
+display: flex;
+justify-content: center;
+}
+
+
+.calendar-container__body{
+background-color: #ffffff;
+}
