@@ -30,6 +30,14 @@
             background-color: #FFFFCC;
             text-align: left;
         }
+		dialog{
+			border: none;
+			box-shadow: 0 2px 6px #ccc;
+			border-radius: 10px;
+		}
+		dialog::backdrop {
+			background-color: rgba(0, 0, 0, 0.1);
+		}
         </style>
    
 </head>
@@ -67,6 +75,14 @@
 	<option value="薪水">薪水</option>
 
 </select>
+		<input type="button" id="show" value="新增類別">
+		<dialog id="infoModal">
+		<p>
+			類別: <input id=item1_Text value="">
+			<input type="button" value="新增" onclick="addOption(type_list1,item1_Text.value, item1_Text.value)">
+		</p>
+		<input type="button" id="close" value="關閉">
+		</dialog>
                     </td>
                 </tr>
                 <tr>
@@ -171,7 +187,7 @@
                 <tr>
                     <td class="auto-style10" style="border-style: double">
         <input type="button" name="Button3" value="新增" id="Button3" style="width:100px;" />
-        <input type="button" name="Button4" value="重置" id="Button4" style="width:100px;" />
+        <input type="reset" value="重置" id="Button4" style="width:100px;" />
                     </td>
                 </tr>
             </table>
@@ -213,6 +229,24 @@
 		</main>
 		<!-- partial -->
 		  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+		  <script>
+			let btn=document.querySelector("#show");
+			let infoModal=document.querySelector("#infoModal");
+			let close=document.querySelector("#close");
+			btn.addEventListener("click", function(){
+			  infoModal.showModal();
+			})
+			close.addEventListener("click", function(){
+			  infoModal.close();
+			})
+		</script>
+		<script>//add droplist item
+			function addOption(list, text, value){
+			var index=list.options.length;
+			list.options[index]=new Option(text, value);
+			list.selectedIndex=index;
+			}
+		</script>
 </body>
 </html>
 
