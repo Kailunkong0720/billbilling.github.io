@@ -37,9 +37,10 @@ const myPieChart = new Chart(ctx, {
         }
     }
 });
-var newDiv;
+var newDiv=document.getElementById("contain")
 function add(){
     //newDiv = document.createElement("div");
+    
     newDiv.innerHTML="早餐100";
     newDiv.style.border="solid 1px";
     newDiv.style.width="200px";
@@ -56,16 +57,17 @@ function add2(){
 }
 //add()
 function chooseY(){
+    document.getElementById("choose2").style.border="none"
     document.getElementById("choose1").style.border="solid 1px blue"
-    newDiv = document.createElement("div");
-    newDiv.innerHTML=""
-    document.getElementById("detail").appendChild(newDiv);
+    //newDiv=document.getElementById("contain")
+    //newDiv.innerHTML=""
     add()
 }
 function chooseM(){
+    document.getElementById("choose1").style.border="none"
     document.getElementById("choose2").style.border="solid 1px blue"
-    newDiv = document.createElement("div");
-    newDiv.innerHTML=""
-    document.getElementById("detail").appendChild(newDiv);
+    //newDiv=document.getElementById("contain")
+    //newDiv.innerHTML=""
+    
     add2()
 }
