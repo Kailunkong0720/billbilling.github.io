@@ -275,6 +275,13 @@
 			close.addEventListener("click", function(){
 			  infoModal.close();
 			})
+			//預設今日
+			var today = new Date();
+			var dd = String(today.getDate()).padStart(2, '0');
+			var mm = String(today.getMonth() + 1).padStart(2, '0');
+			var yyyy = today.getFullYear();
+			today = yyyy + '-' + mm + '-' + dd;
+			document.getElementById("date_picker").value = today;
 			//add droplist item
 			function addOption(list, text, value){
 			var index=list.options.length;
