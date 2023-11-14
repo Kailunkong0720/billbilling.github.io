@@ -61,12 +61,12 @@
                 </tr>
                 <tr>
                     <td class="auto-style12" style="border-style: double" dir="ltr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 金額
-        <input name="money_text" type="text" id="money_text" style="width:200px;" />
+        <input name="money_text" type="text" id="money_text" style="width:200px;" required pattern="^\d+$"/> <!--非負數-->
                     </td>
                 </tr>
                 <tr>
                     <td class="auto-style12" style="border-style: double">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 名稱
-        <input name="name_text" type="text" id="name_text" style="width:200px;" />
+        <input name="name_text" type="text" id="name_text" style="width:200px;" required/>
                     </td>
                 </tr>
                 <tr>
@@ -186,8 +186,8 @@
                 </tr>
                 <tr>
                     <td class="auto-style10" style="border-style: double">
-        <input type="button" name="Button3" value="新增" id="Button3" style="width:100px;" />
-        <input type="reset" value="重置" id="Button4" style="width:100px;" />
+		<input type="submit" value="新增"  style="width:100px;" />
+        <input type="reset"  value="重置"  style="width:100px;" />
                     </td>
                 </tr>
             </table>
