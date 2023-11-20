@@ -48,7 +48,7 @@
 
 "use strict";
 const expense_mon_data=[120,70,300,4000,100,1000,50,32500];
-const expense_year_data=[12500,35000,20000,10000,8000,15000,6000,7950,34510,175200,21000,10025];
+const expense_year_data=[12500,35000,20000,10000,8000,15000,6000,7950,34510,135200,21000,10025];
 const income_mon_data=[176,1760,10000,1584,3520];
 const income_year_data=[20000,33400,30000,13500,21000,20000,14400,23520,24400,11760,11584,100000];
 /*======== 1. SPLINA AREA CHART 01 ========*/
@@ -416,10 +416,12 @@ if (mixedChart1 !== null) {
 /*======== 6. RADIAL BAR CHART 01 ========*/
 var radialBarChart1 = document.querySelector("#radial-bar-chart-1");
 var revenue=0;
+var goal=12600;
 for(let i =0;i<profits.length;i++){
   revenue+=profits[i];
 }
-document.getElementById("revenue").innerHTML=String(revenue);
+console.log((revenue/goal)*100)
+document.getElementById("revenue").innerHTML="$"+String(revenue);
 if (radialBarChart1 !== null) {
   var radialBarOptions1 = {
     chart: {
@@ -458,8 +460,8 @@ if (radialBarChart1 !== null) {
       type: "solid",
       colors: "#9e6de0",
     },
-    series: [70],
-    labels: ["Yearly Profit"],
+    series: [(revenue/goal)*100],
+    labels: ["Your Profit"],
   };
 
   var randerRadialBar1 = new ApexCharts(radialBarChart1, radialBarOptions1);
