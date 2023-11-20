@@ -1,6 +1,6 @@
 window.onload=function(){
     const expense_mon_data=[120,70,300,4000,100,1000,50,32500];
-    const expense_year_data=[12500,35000,20000,10000,8000,15000,6000,7950,34510,175200,21000,10025];
+    const expense_year_data=[12500,35000,20000,10000,8000,15000,6000,7950,34510,135200,21000,10025];
     const income_mon_data=[176,1760,10000,1584,3520];
     const income_year_data=[20000,33400,30000,13500,21000,20000,14400,23520,24400,11760,11584,100000];
     var expense_mon=document.getElementById("total_mon_expense");
