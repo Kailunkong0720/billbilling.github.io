@@ -15,6 +15,9 @@
 
   <title>Mono - Responsive Admin & Dashboard Template</title>
 
+
+
+
   <!-- GOOGLE FONTS -->
   <link href="https://fonts.googleapis.com/css?family=Karla:400,700|Roboto" rel="stylesheet">
   <link href="plugins/material/css/materialdesignicons.min.css" rel="stylesheet" />
@@ -106,9 +109,9 @@
               <li
               class="active"
                >
-                <a class="sidenav-item-link" href="analytics.html">
+                <a class="sidenav-item-link" href="createBill.html">
                   <i class="mdi mdi-chart-line"></i>
-                  <span class="nav-text">資料分析</span>
+                  <span class="nav-text">新增帳單</span>
                 </a>
               </li>
             
@@ -117,7 +120,7 @@
 
             
               <li class="section-title">
-                團隊
+                Apps
               </li>
    <li
    >
@@ -258,7 +261,7 @@
                 <span class="sr-only">Toggle navigation</span>
               </button>
 
-              <span class="page-title">analytics</span>
+              <span class="page-title">新增帳單</span>
 
               <div class="navbar-right ">
 
@@ -608,9 +611,9 @@
 
         <!-- ====================================
         ——— CONTENT WRAPPER
-        ===================================== -->
+
         <div class="content-wrapper">
-          <div class="content">                <!-- Analytics Status -->
+          <div class="content">               
                 <div class="row justify-content-between mb-5 ">
                   <div class="col-lg-6">
                     <div class="row">
@@ -659,11 +662,11 @@
                 </div>
 
 
-                <!-- User Sessions Bounce -->
+                 User Sessions Bounce 
                 <div class="row">
                   <div class="col-xl-4">
                     
-                        <!-- User -->
+                        User 
                         <div class="card card-default">
                           <div class="card-header">
                             <h2>Users</h2>
@@ -686,7 +689,7 @@
                   </div>
                   <div class="col-xl-4">
                     
-                        <!-- Session -->
+                         Session 
                         <div class="card card-default">
                           <div class="card-header">
                             <h2>Sessions</h2>
@@ -709,7 +712,7 @@
                   </div>
                   <div class="col-xl-4">
                     
-                  <!-- Bounce Rate -->
+                   Bounce Rate 
                   <div class="card card-default">
                     <div class="card-header">
                       <h2>Bounce Rate</h2>
@@ -734,39 +737,201 @@
 
                 <div class="row">
                   <div class="col-xl-6">
-                    
-                    <!-- User Acquisition Statistics -->
+                  -->
+                  <div class="content-wrapper"> 
+                    <div class="content">
                     <div class="card card-default" id="user-acquisition">
                       <div class="card-header border-bottom pb-0">
-                        <h2>User Acquisition</h2>
-                        <ul class="nav nav-underline-active-primary" role="tablist">
+                        <h2>新增支出</h2>
+                        <ul class="nav nav-underline-active-primary">
                           <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#traffic-channel" role="tab" aria-selected="true">Traffic
-                              Channel</a>
+                            <a class="nav-link active" href="createBill.html"  aria-selected="true">支出</a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#source-medium" role="tab" aria-selected="false">Source / Medium </a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#referrals" role="tab" aria-selected="false">Referrals</a>
-                          </li>
+                            <a class="nav-link"  href="createBill2.html"  aria-selected="false">收入</a>
                         </ul>
                       </div>
+                            
+                
+                                
+                    <form id="form1">
+                    <div>
+                      &nbsp;金額:
+                    <input name="money_text" type="text" id="money_text" style="width:200px;margin-left: 10px" required pattern="^\d+$"/><!--非負數-->
+                    </div>  
 
-                      <div class="tab-content" id="myTabContent">
-                        <div id="barchartlg1"></div>
-                      </div>
-                      <div class="card-footer d-flex flex-wrap bg-white">
-                        <a href="#" class="text-uppercase py-3">Acquisition Report</a>
-                      </div>
+                    <div>
+                      &nbsp;名稱:
+                    <input name="name_text" type="text" id="name_text" style="width:200px;margin-left: 10px" required/>	
                     </div>
 
+                    <div>
+                      &nbsp;類別:
+                    <select name="type_list1" id="type_list1" style="width:100px;margin-left: 10px">
+                    <option value="飲食">飲食</option>
+            
+                    </select>
+                    &nbsp;<select name="type_list2" id="type_list2" style="width:100px;">
+                    <option value="早餐">早餐</option>
+            
+                    </select>
+                    <input type="button" id="show" value="新增類別">
+                    <dialog id="infoModal" style="left:50%; top: 40%;">
+                    <p>	
+                      類別-1: <input id=item1_Text value="">
+                      類別-2: <input id=item2_Text value="">
+                      <input type="button" value="新增" onclick="addOption(type_list1,item1_Text.value, item1_Text.value),addOption(type_list2,item2_Text.value, item2_Text.value)">
+                    </p>
+                    <input type="button" id="close" value="關閉">
+                    </dialog>
+                    </div>       
+                    
+                    <div>
+                      &nbsp;商家:
+                      <input name="store_text" type="text" id="store_text" style="width:200px; margin-left: 10px" />
+                    </div>
+                                
+                    <div>
+                      &nbsp;日期:
+                      <input type="date"  id="date_picker"  name="record_date" value="2023-01-01" min="2023-01-01" max="2053-12-31" class="auto-style14" style="margin-left: 10px" />
+                    </div>       
+                                
+                            
+                    <div>      
+                      &nbsp;時間:
+                    <select name="time_list1" id="time_list1" style="width:100px; margin-left: 10px">
+              <option value="00">00</option>
+              <option value="01">01</option>
+              <option value="02">02</option>
+              <option value="03">03</option>
+              <option value="04">04</option>
+              <option value="05">05</option>
+              <option value="06">06</option>
+              <option value="07">07</option>
+              <option value="08">08</option>
+              <option value="09">09</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+              <option value="16">16</option>
+              <option value="17">17</option>
+              <option value="18">18</option>
+              <option value="19">19</option>
+              <option value="20">20</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="23">23</option>
+            
+            </select>
+                                    : <select name="time_list2" id="time_list2" style="width:100px;">
+              <option value="00">00</option>
+              <option value="01">01</option>
+              <option value="02">02</option>
+              <option value="03">03</option>
+              <option value="04">04</option>
+              <option value="05">05</option>
+              <option value="06">06</option>
+              <option value="07">07</option>
+              <option value="08">08</option>
+              <option value="09">09</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+              <option value="16">16</option>
+              <option value="17">17</option>
+              <option value="18">18</option>
+              <option value="19">19</option>
+              <option value="20">20</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="23">23</option>
+              <option value="24">24</option>
+              <option value="25">25</option>
+              <option value="26">26</option>
+              <option value="27">27</option>
+              <option value="28">28</option>
+              <option value="29">29</option>
+              <option value="30">30</option>
+              <option value="31">31</option>
+              <option value="32">32</option>
+              <option value="33">33</option>
+              <option value="34">34</option>
+              <option value="35">35</option>
+              <option value="36">36</option>
+              <option value="37">37</option>
+              <option value="38">38</option>
+              <option value="39">39</option>
+              <option value="40">40</option>
+              <option value="41">41</option>
+              <option value="42">42</option>
+              <option value="43">43</option>
+              <option value="44">44</option>
+              <option value="45">45</option>
+              <option value="46">46</option>
+              <option value="47">47</option>
+              <option value="48">48</option>
+              <option value="49">49</option>
+              <option value="50">50</option>
+              <option value="51">51</option>
+              <option value="52">52</option>
+              <option value="53">53</option>
+              <option value="54">54</option>
+              <option value="55">55</option>
+              <option value="56">56</option>
+              <option value="57">57</option>
+              <option value="58">58</option>
+              <option value="59">59</option>
+            
+            </select>
+          </div>   
+                            
+                  <div>
+                    &nbsp;附件:
+                      <input type="file" id="profile_pic" name="profile_pic" accept=".jpg, .jpeg, .png" style="margin-left: 10px"><br>
                   </div>
-
-                  <!-- Sessions by Device -->
+                 
+                                
+                    <input type="submit" value="新增"  style="width:100px; margin-left:85%" />
+                  </form>
+                    </div>
+                    </div>
+                    
+                    <div class="content" id="incomeList">
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="card card-default">
+                            <div class="card-header">
+                              <h2>Expense</h2>             
+                            </div>
+                            <div class="card-body">
+                              <table id="productsTable" class="table table-hover table-product" style="width:100%">
+                                <thead>
+                                  <tr>
+                                    <th></th>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Store</th>
+                                    <th>Money</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <tbody></tbody>
+                                  </tr>
+                                </div>          
+<!--
+                   Sessions by Device 
                   <div class="col-xl-6">
                     
-                      <!-- Sessions By Device -->
+                       Sessions By Device 
                       <div class="card card-default">
                         <div class="card-header border-bottom">
                           <h2 class="mdi mdi-desktop-mac">Sessions by Device</h2>
@@ -820,7 +985,7 @@
                 <div class="row">
                   <div class="col-xl-4">
                     
-                    <!-- Us Vector Map -->
+                     Us Vector Map 
                     <div class="card card-default">
                       <div class="card-header">
                         <h2>User Map</h2>
@@ -847,7 +1012,7 @@
                   </div>
                   <div class="col-xl-4">
                     
-                    <!-- Page Views  -->
+                    Page Views  
                     <div class="card card-default" id="page-views">
                       <div class="card-header">
                         <h2>Page Views</h2>
@@ -855,53 +1020,53 @@
                       <div class="card-body py-0" data-simplebar style="height: 392px;">
                         <table class="table table-borderless table-thead-border">
                           <thead>
-                            <tr>
+                            
                               <th>Page</th>
                               <th class="text-right px-3">Page Views</th>
                               <th class="text-right">Avg Time</th>
-                            </tr>
+                            
                           </thead>
                           <tbody>
-                            <tr>
-                              <td class="text-primary"><a class="link" href="analytics.html">/analytics.html</a></td>
-                              <td class="text-right px-3">521</td>
-                              <td class="text-right">2m:14s</td>
-                            </tr>
-                            <tr>
-                              <td class="text-primary"><a class="link" href="email-inbox.html">/email-inbox.html</a></td>
-                              <td class="text-right px-3">356</td>
-                              <td class="text-right">2m:23s</td>
-                            </tr>
-                            <tr>
-                              <td class="text-primary"><a class="link" href="email-compose.html">/email-compose.html</a></td>
-                              <td class="text-right px-3">254</td>
-                              <td class="text-right">2m:2s</td>
-                            </tr>
-                            <tr>
-                              <td class="text-primary"><a class="link" href="charts-chartjs.html">/charts-chartjs.html</a></td>
-                              <td class="text-right px-3">126</td>
-                              <td class="text-right">1m:15s</td>
-                            </tr>
-                            <tr>
-                              <td class="text-primary"><a class="link" href="profile.html">/profile.html</a></td>
-                              <td class="text-right px-3">50</td>
-                              <td class="text-right">1m:7s</td>
-                            </tr>
-                            <tr>
-                              <td class="text-primary"><a class="link" href="general-widgets.html">/general-widgets.html</a></td>
-                              <td class="text-right px-3">50</td>
-                              <td class="text-right">2m:35s</td>
-                            </tr>
-                            <tr>
-                              <td class="text-primary"><a class="link" href="card.html">/card.html</a></td>
-                              <td class="text-right px-3">590</td>
-                              <td class="text-right">5m:55s</td>
-                            </tr>
-                            <tr>
-                              <td class="text-primary"><a class="link" href="email-inbox.html">/email-inbox.html</a></td>
-                              <td class="text-right px-3">29</td>
-                              <td class="text-right">8m:5s</td>
-                            </tr>
+                            
+                               class="text-primary"><a class="link" href="analytics.html">/analytics.html</a>
+                               class="text-right px-3">521
+                               class="text-right">2m:14s
+                            
+                            
+                               class="text-primary"><a class="link" href="email-inbox.html">/email-inbox.html</a>
+                               class="text-right px-3">356
+                               class="text-right">2m:23s
+                            
+                            
+                               class="text-primary"><a class="link" href="email-compose.html">/email-compose.html</a>
+                               class="text-right px-3">254
+                               class="text-right">2m:2s
+                            
+                            
+                               class="text-primary"><a class="link" href="charts-chartjs.html">/charts-chartjs.html</a>
+                               class="text-right px-3">126
+                               class="text-right">1m:15s
+                            
+                            
+                               class="text-primary"><a class="link" href="profile.html">/profile.html</a>
+                               class="text-right px-3">50
+                               class="text-right">1m:7s
+                            
+                            
+                               class="text-primary"><a class="link" href="general-widgets.html">/general-widgets.html</a>
+                               class="text-right px-3">50
+                               class="text-right">2m:35s
+                            
+                            
+                               class="text-primary"><a class="link" href="card.html">/card.html</a>
+                               class="text-right px-3">590
+                               class="text-right">5m:55s
+                            
+                            
+                               class="text-primary"><a class="link" href="email-inbox.html">/email-inbox.html</a>
+                               class="text-right px-3">29
+                               class="text-right">8m:5s
+                            
                           </tbody>
                         </table>
                       </div>
@@ -912,7 +1077,7 @@
 
                   </div>
                   <div class="col-xl-4">
-                    <!-- Current Users  -->
+                    Current Users  
                     <div class="card card-default">
                       <div class="card-header">
                         <h2>Current Users</h2>
@@ -928,10 +1093,9 @@
                   </div>
                 </div>
 </div>
-          
-        </div>
-        
-          <!-- Footer -->
+          -->
+
+          <!-- Footer 
           <footer class="footer mt-auto">
             <div class="copyright bg-white">
               <p>
@@ -944,114 +1108,61 @@
                 document.getElementById("copy-year").innerHTML = year;
             </script>
           </footer>
+          -->
 
-      </div>
-    </div>
-    
-                    <!-- Card Offcanvas -->
-                    <div class="card card-offcanvas" id="contact-off" >
-                      <div class="card-header">
-                        <h2>Contacts</h2>
-                        <a href="#" class="btn btn-primary btn-pill px-4">Add New</a>
-                      </div>
-                      <div class="card-body">
+          <script>
+            //類別視窗
+            let btn=document.querySelector("#show");
+            let infoModal=document.querySelector("#infoModal");
+            let close=document.querySelector("#close");
+            btn.addEventListener("click", function(){
+              infoModal.showModal();
+            })
+            close.addEventListener("click", function(){
+              infoModal.close();
+            })
+            //預設今日
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0');
+            var yyyy = today.getFullYear();
+            today = yyyy + '-' + mm + '-' + dd;
+            document.getElementById("date_picker").value = today;
+            //add droplist item
+            function addOption(list, text, value){
+              var index=list.options.length;
+              if(text!=""){
+                list.options[index]=new Option(text, value);
+                list.selectedIndex=index;
+              }
+            }
+            //顯示帳單
+            const form = document.getElementById('form1')		
+            form.addEventListener('submit', () => {	
+            let money = document.getElementById("money_text").value
+            let name = document.getElementById("name_text").value
+            let store=document.getElementById("store_text").value
+            let type_list1 = document.getElementById("type_list1").value
+            let type_list2 = document.getElementById("type_list2").value
+            let date = document.getElementById("date_picker").value
+            let time_list1 = document.getElementById("time_list1").value
+            let time_list2 = document.getElementById("time_list2").value
+            let file = document.getElementById("profile_pic").src
 
-                        <div class="mb-4">
-                          <input type="text" class="form-control form-control-lg form-control-secondary rounded-0" placeholder="Search contacts...">
-                        </div>
-
-                        <div class="media media-sm">
-                          <div class="media-sm-wrapper">
-                            <a href="user-profile.html">
-                              <img src="images/user/user-sm-01.jpg" alt="User Image">
-                              <span class="active bg-primary"></span>
-                            </a>
-                          </div>
-                          <div class="media-body">
-                            <a href="user-profile.html">
-                              <span class="title">Selena Wagner</span>
-                              <span class="discribe">Designer</span>
-                            </a>
-                          </div>
-                        </div>
-
-                        <div class="media media-sm">
-                          <div class="media-sm-wrapper">
-                            <a href="user-profile.html">
-                              <img src="images/user/user-sm-02.jpg" alt="User Image">
-                              <span class="active bg-primary"></span>
-                            </a>
-                          </div>
-                          <div class="media-body">
-                            <a href="user-profile.html">
-                              <span class="title">Walter Reuter</span>
-                              <span>Developer</span>
-                            </a>
-                          </div>
-                        </div>
-
-                        <div class="media media-sm">
-                          <div class="media-sm-wrapper">
-                            <a href="user-profile.html">
-                              <img src="images/user/user-sm-03.jpg" alt="User Image">
-                            </a>
-                          </div>
-                          <div class="media-body">
-                            <a href="user-profile.html">
-                              <span class="title">Larissa Gebhardt</span>
-                              <span>Cyber Punk</span>
-                            </a>
-                          </div>
-                        </div>
-
-                        <div class="media media-sm">
-                          <div class="media-sm-wrapper">
-                            <a href="user-profile.html">
-                              <img src="images/user/user-sm-04.jpg" alt="User Image">
-                            </a>
-
-                          </div>
-                          <div class="media-body">
-                            <a href="user-profile.html">
-                              <span class="title">Albrecht Straub</span>
-                              <span>Photographer</span>
-                            </a>
-                          </div>
-                        </div>
-
-                        <div class="media media-sm">
-                          <div class="media-sm-wrapper">
-                            <a href="user-profile.html">
-                              <img src="images/user/user-sm-05.jpg" alt="User Image">
-                              <span class="active bg-danger"></span>
-                            </a>
-                          </div>
-                          <div class="media-body">
-                            <a href="user-profile.html">
-                              <span class="title">Leopold Ebert</span>
-                              <span>Fashion Designer</span>
-                            </a>
-                          </div>
-                        </div>
-
-                        <div class="media media-sm">
-                          <div class="media-sm-wrapper">
-                            <a href="user-profile.html">
-                              <img src="images/user/user-sm-06.jpg" alt="User Image">
-                              <span class="active bg-primary"></span>
-                            </a>
-                          </div>
-                          <div class="media-body">
-                            <a href="user-profile.html">
-                              <span class="title">Selena Wagner</span>
-                              <span>Photographer</span>
-                            </a>
-                          </div>
-                        </div>
-
-                      </div>
-                    </div>
-
+            let data =['',name,type_list1+"-"+type_list2,store,money,date,time_list1+":"+time_list2 ]
+            let tbody = document.querySelector('tbody')
+            let tr = document.createElement('tr')
+            tbody.appendChild(tr)
+            for (let j = 0; j < data.length; j++) {
+              let td = document.createElement('td')
+              td.innerHTML = data[j]
+              tr.appendChild(td)
+            }
+            event.preventDefault() 
+          })
+            
+          </script>
+                    
 
 
     
