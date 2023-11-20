@@ -65,7 +65,9 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
   <script src="plugins/nprogress/nprogress.js"></script>
+  <script src="https://cdn.staticfile.org/jquery/2.2.4/jquery.min.js"></script>
   <script src="js/ie_data.js"></script>
+  <script src="js/print.js"></script>
 </head>
 
 
@@ -615,7 +617,7 @@
         ——— CONTENT WRAPPER
         ===================================== -->
         <div class="content-wrapper">
-          <div class="content">                
+          <div class="content" id="html_content">          
                   <!-- Top Statistics -->
                   <div class="row">
                     <div class="col-xl-3 col-sm-6">
@@ -830,8 +832,7 @@
                               <th>Day</th>
                               <!--<th>Daily Sale</th>
                               <th>Sold</th>-->
-                              <th></th>
-                              <th></th>
+                              
                               <th>Cost</th>
                               <th></th>
                             </tr>
@@ -851,8 +852,7 @@
                                 <div id="tbl-chart-01"></div>
                               </td>
                               <td>4</td>-->
-                              <td></td>
-                              <td></td>
+                             
                               <td>180</td>
                               <td>
                                 <div class="dropdown">
@@ -882,8 +882,7 @@
                                 <div id="tbl-chart-02"></div>
                               </td>
                               <td>1</td>-->
-                              <td></td>
-                              <td></td>
+                              
                               <td>1400</td>
                               <td>
                                 <div class="dropdown">
@@ -913,8 +912,7 @@
                                 <div id="tbl-chart-03"></div>
                               </td>
                               <td>6</td>-->
-                              <td></td>
-                              <td></td>
+                              
                               <td>260</td>
                               <td>
                                 <div class="dropdown">
@@ -944,8 +942,7 @@
                                 <div id="tbl-chart-04"></div>
                               </td>
                               <td>6</td>-->
-                              <td></td>
-                              <td></td>
+                              
                               <td>700</td>
                               <td>
                                 <div class="dropdown">
@@ -975,8 +972,7 @@
                                 <div id="tbl-chart-05"></div>
                               </td>
                               <td>8</td>-->
-                              <td></td>
-                              <td></td>
+                              
                               <td>42000</td>
                               <td>
                                 <div class="dropdown">
@@ -1006,8 +1002,7 @@
                                 <div id="tbl-chart-06"></div>
                               </td>
                               <td>79</td>-->
-                              <td></td>
-                              <td></td>
+                              
                               <td>12</td>
                               <td>
                                 <div class="dropdown">
@@ -1037,8 +1032,7 @@
                                 <div id="tbl-chart-07"></div>
                               </td>
                               <td>76</td>-->
-                              <td></td>
-                              <td></td>
+                              
                               <td>36</td>
                               <td>
                                 <div class="dropdown">
@@ -1068,8 +1062,7 @@
                                 <div id="tbl-chart-08"></div>
                               </td>
                               <td>38</td>-->
-                              <td></td>
-                              <td></td>
+                              
                               <td>5</td>
                               <td>
                                 <div class="dropdown">
@@ -1099,8 +1092,7 @@
                                 <div id="tbl-chart-09"></div>
                               </td>
                               <td>6</td>-->
-                              <td></td>
-                              <td></td>
+                              
                               <td>46</td>
                               <td>
                                 <div class="dropdown">
@@ -1130,8 +1122,7 @@
                                 <div id="tbl-chart-10"></div>
                               </td>
                               <td>3</td>-->
-                              <td></td>
-                              <td></td>
+                              
                               <td>19</td>
                               <td>
                                 <div class="dropdown">
@@ -1304,10 +1295,10 @@
                 </div>
 
 
-                <div class="row">
-                  <div class="col-xl-4">
+                <!--<div class="row">
+                  <div class="col-xl-4">-->
                     <!-- Top Customers -->
-                    <div class="card card-default">
+                    <!--<div class="card card-default">
                       <div class="card-header">
                         <h2>Top Customers</h2>
                       </div>
@@ -1377,10 +1368,10 @@
                 </div>
 
               <div class="row">
-                <div class="col-xl-8">
+                <div class="col-xl-8">-->
                   
                     <!-- Sales by Product -->
-                    <div class="card card-default">
+                    <!--<div class="card card-default">
                       <div class="card-header align-items-center">
                         <h2 class="">Sales by Product</h2>
                         <a href="#" class="btn btn-primary btn-pill" data-toggle="modal" data-target="#modal-stock">Add Stock</a>
@@ -1491,10 +1482,10 @@
                     </div>
 
                 </div>
-                <div class="col-xl-4">
+                <div class="col-xl-4">-->
                   
                       <!-- Chat -->
-                      <div class="card card-default chat">
+                      <!--<div class="card card-default chat">
                         <div class="card-header">
                           <h2>Selena Wagner</h2>
                           <div class="dropdown dropdown-chat-state">
@@ -1556,9 +1547,9 @@
                             </ul>
                           </div>
                         </div>
-                        <div class="card-body pb-0" data-simplebar style="height: 363px;">
+                        <div class="card-body pb-0" data-simplebar style="height: 363px;">-->
                           <!-- Media Chat Left -->
-                          <div class="media media-chat">
+                          <!--<div class="media media-chat">
                             <img src="images/user/user-sm-01.jpg" class="rounded-circle" alt="Avata Image">
                             <div class="media-body">
                               <div class="text-content">
@@ -1566,10 +1557,10 @@
                                 <time class="time">5 mins ago</time>
                               </div>
                             </div>
-                          </div>
+                          </div>-->
 
                           <!-- Media Chat Right -->
-                          <div class="media media-chat media-chat-right">
+                          <!--<div class="media media-chat media-chat-right">
                             <div class="media-body">
                               <div class="text-content">
                                 <span class="message">Hello i am Riman.</span>
@@ -1581,10 +1572,10 @@
                               </div>
                             </div>
                             <img src="images/user/user-sm-02.jpg" class="rounded-circle" alt="Avata Image">
-                          </div>
+                          </div>-->
 
                           <!-- Media Chat Left -->
-                          <div class="media media-chat">
+                          <!--<div class="media media-chat">
                             <img src="images/user/user-sm-01.jpg" class="rounded-circle" alt="Avata Image">
                             <div class="media-body">
                               <div class="text-content">
@@ -1607,10 +1598,10 @@
                       </div>
 
                 </div>
-              </div>
+              </div>-->
 
               <!-- Stock Modal -->
-              <div class="modal fade modal-stock" id="modal-stock" aria-labelledby="modal-stock" aria-hidden="true">
+              <!--<div class="modal fade modal-stock" id="modal-stock" aria-labelledby="modal-stock" aria-hidden="true">
                 <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
                   <form action="#">
                     <div class="modal-content">
@@ -1728,16 +1719,16 @@
                     </div>
                   </form>
                 </div>
-              </div>
-</div>
-          
+              </div>-->
+          </div>
+          <button id="downloadBtn">列印成PDF檔</button>
         </div>
         
           <!-- Footer -->
           <footer class="footer mt-auto">
             <div class="copyright bg-white">
               <p>
-                &copy; <span id="copy-year"></span> Copyright Mono Dashboard Bootstrap Template by <a class="text-primary" href="http://www.iamabdus.com/" target="_blank" >Abdus</a>.
+                &copy; <span id="copy-year"></span> Copyright project by <a class="text-primary" href="http://www.kailun.com/" target="_blank" >Group 8</a>.
               </p>
             </div>
             <script>
