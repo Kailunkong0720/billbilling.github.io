@@ -796,7 +796,7 @@
                     </div>       
                                 
                             
-                    <!-- <div>      
+                    <div>      
                       &nbsp;時間:
                     <select name="time_list1" id="time_list1" style="width:100px; margin-left: 10px">
               <option value="00">00</option>
@@ -888,7 +888,7 @@
               <option value="59">59</option>
             
             </select>
-          </div>    -->
+          </div>   
                             
                   <div>
                     &nbsp;附件:
@@ -913,12 +913,12 @@
                                 <thead>
                                   <tr>
                                     <th></th>
-                                    <th>Name</th>
-                                    <th>Type</th>
+                                    <th>名稱</th>
+                                    <th>類別</th>
                                     <!-- <th>Store</th> -->
-                                    <th>Money</th>
-                                    <th>Date</th>
-                                    <!-- <th>Time</th> -->
+                                    <th>日期</th>
+                                    <th>時間</th>
+                                    <th>金額</th>
                                   </tr>
                                 </thead>
                                 <tbody>
@@ -1144,11 +1144,11 @@
             let type_list1 = document.getElementById("type_list1").value
             let type_list2 = document.getElementById("type_list2").value
             let date = document.getElementById("date_picker").value
-            //let time_list1 = document.getElementById("time_list1").value
-            //let time_list2 = document.getElementById("time_list2").value
+            let time_list1 = document.getElementById("time_list1").value
+            let time_list2 = document.getElementById("time_list2").value
             let file = document.getElementById("profile_pic").src
 
-            let data =['',name,type_list1+"-"+type_list2/*,store*/,money,date/*,time_list1+":"+time_list2*/ ]
+            let data =['',name,type_list1+"-"+type_list2,date,time_list1+":"+time_list2/*,store*/,money ]
             let tbody = document.querySelector('tbody')
             let tr = document.createElement('tr')
             tbody.appendChild(tr)
