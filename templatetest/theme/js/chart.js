@@ -461,7 +461,7 @@ if (radialBarChart1 !== null) {
       colors: "#9e6de0",
     },
     series: [(revenue/goal)*100],
-    labels: ["Your Profit"],
+    labels: ["已達成\n"+String((revenue/goal)*100)+"%"],
   };
 
   var randerRadialBar1 = new ApexCharts(radialBarChart1, radialBarOptions1);
