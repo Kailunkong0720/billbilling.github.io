@@ -235,7 +235,7 @@
                         <div>
                           &nbsp;類別:
                         <select name="type_list1" id="type_list1" style="width:100px; margin-left: 10px">
-                          <option value="薪水">薪水</option>
+                          <!-- <option value="薪水">薪水</option> -->
                         
                         </select>
                             <input type="button" id="show" value="新增類別">
@@ -254,7 +254,7 @@
                         </div>            
                                 
                                 
-                        <div>      
+                         <!-- <div>      
                           &nbsp;時間:
                         <select name="time_list1" id="time_list1" style="width:100px; margin-left: 10px">
                   <option value="00">00</option>
@@ -345,8 +345,8 @@
                   <option value="58">58</option>
                   <option value="59">59</option>
                 
-                </select>
-                        </div>         
+                </select> 
+                        </div>          -->
                                 
                         <div>
                           &nbsp;附件:
@@ -366,7 +366,7 @@
             <div class="col-12">
               <div class="card card-default">
                 <div class="card-header">
-                  <h2>Income</h2>             
+                  <h2>收入</h2>             
                 </div>
                 <div class="card-body">
                   <table id="productsTable" class="table table-hover table-product" style="width:100%">
@@ -376,7 +376,7 @@
                         <!-- <th>Name</th> -->
                         <th>類別</th>
                         <th>日期</th>
-                        <th>時間</th>
+                        <!-- <th>時間</th> -->
                         <th>金額</th>
                       </tr>
                     </thead>
@@ -396,6 +396,125 @@
                         
                       </tr>
                     </div>
+
+                    <!-- import axios -->
+                    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+                    <!-- Get -->
+                    <script>          
+                      //get 帳單        
+                      async function fetchData() {
+                        try {
+                          let response = await axios.get('https://billapi-6373626296ec.herokuapp.com/income');
+                          let tbody = document.querySelector('tbody');
+                          tbody.innerHTML = ''; // 清除先前的表格內容
+                      
+                          for (let i = 0; i < response.data.length; i++) {
+                            let income = response.data[i];
+                            let money = income.price;
+                            let date = moment.utc(income.date).format('YYYY/MM/DD');
+                      
+                            let incomeSorcResponse = await axios.get(`https://billapi-6373626296ec.herokuapp.com/Incomsorc/${income.incom_sorc_id}`);
+                            let incomeSorc = incomeSorcResponse.data.sorc_Items;
+                      
+                            let item = ['', incomeSorc, date, money];
+                            let tr = document.createElement('tr');
+                            
+                            for (let j = 0; j < item.length; j++) {
+                              let td = document.createElement('td');
+                              td.innerHTML = item[j];
+                              tr.appendChild(td);
+                            }                
+                            tbody.appendChild(tr);
+                          }
+                        } catch (error) {
+                          console.error('Error fetching data:', error);
+                        }
+                      }                     
+                      // 調用 fetchData 函數
+                      fetchData();
+                         
+                      async function initialize() {
+                        await getSorc(); // 等待 getSorc 完成
+                        updateIncomeJSON(); // getSorc 完成後再執行 updateIncomeJSON
+                      }                      
+                      initialize(); // 調用初始化函數
+                      //get 類別
+                      async function getSorc() {
+                        try {
+                          let response = await axios.get('https://billapi-6373626296ec.herokuapp.com/Incomsorc');
+                          let typeList1 = document.getElementById('type_list1');
+                      
+                          // 清空現有的選項
+                          typeList1.innerHTML = '';
+                      
+                          // 迭代 sorc_Items 並添加到下拉選單
+                          response.data.forEach(function (item) {
+                            let option = document.createElement('option');
+                            option.value = item.sorc_Items;
+                            option.textContent = item.sorc_Items;
+                            typeList1.appendChild(option);
+                          });
+                          // 設定第一項為預設選中
+                          typeList1.selectedIndex = 0;
+                        } catch (error) {
+                          // 錯誤處理
+                          console.error('錯誤:', error);
+                        }
+                      }                    
+                      getSorc();
+                    </script>
+
+                    <!-- post -->
+                    <script>
+                      let incomeJSON = {
+                        "incom_sorc_id": null,
+                        "member_id": 1,
+                        "price": null,
+                        "date": null
+                      };                     
+                      document.getElementById('type_list1').addEventListener('change', function () {
+                        updateIncomeJSON();
+                      });                                         
+                      async function updateIncomeJSON() {
+                        try {
+                          let selectedOption = document.getElementById('type_list1').value;
+                          let response = await axios.get('https://billapi-6373626296ec.herokuapp.com/Incomsorc');
+                          let selectedSorcItem = response.data.find(item => item.sorc_Items === selectedOption);                     
+                          // 在此處更新表單
+                          if (selectedSorcItem) {
+                            // 更新 incomeJSON 的 incom_sorc_id
+                            incomeJSON.incom_sorc_id = selectedSorcItem.incom_sorc_id;
+                          } else {
+                            console.error('找不到匹配的 sorc_Items。');
+                            // 可能需要進行錯誤處理
+                          }
+                        } catch (error) {
+                          // 錯誤處理
+                          console.error('錯誤:', error);
+                        }
+                      }                   
+                      const form = document.getElementById('form1');
+                      form.addEventListener('submit', (event) => {
+                        event.preventDefault(); // 防止表單提交的默認行為
+                      
+                        // 更新 incomeJSON 的其他屬性
+                        incomeJSON.price = document.getElementById("money_text").value;
+                        incomeJSON.date = document.getElementById("date_picker").value;
+                        console.log(incomeJSON)
+                        // 在這裡使用更新後的 incomeJSON 進行 POST 請求
+                        axios.post('https://billapi-6373626296ec.herokuapp.com/income', incomeJSON)
+                          .then(function (response) {
+                            // 成功處理回應
+                            console.log('成功:', response.data);
+                          })
+                          .catch(function (error) {
+                            // 錯誤處理
+                            console.error('錯誤:', error);
+                          });
+                      });
+                       
+                    </script>
+
 
                     <script>
                       //類別視窗
@@ -423,43 +542,6 @@
                          list.selectedIndex=index;
                         }
                       }
-                      //顯示帳單
-                      
-                      const form = document.getElementById('form1')		
-                      form.addEventListener('submit', () => {	
-                      let money = document.getElementById("money_text").value
-                      //let name = document.getElementById("name_text").value
-                      let type_list1 = document.getElementById("type_list1").value
-                      let date = document.getElementById("date_picker").value
-                      let time_list1 = document.getElementById("time_list1").value
-                      let time_list2 = document.getElementById("time_list2").value
-                      let file = document.getElementById("profile_pic").src
-
-                      //document.getElementById("file").src=file
-                      //document.getElementById("name").textContent=name
-                      //document.getElementById("type").textContent=type_list1
-                      //document.getElementById("money").textContent=money
-                      //document.getElementById("date").textContent=date
-                      //document.getElementById("time").textContent=time_list1+":"+time_list2
-                      
-
-                      let data =[''/*,name*/,type_list1,date,time_list1+":"+time_list2,money]
-                      
-                
-                
-                      let tbody = document.querySelector('tbody')
-                      let tr = document.createElement('tr')
-                      tbody.appendChild(tr)
-                      for (let j = 0; j < data.length; j++) {
-                        let td = document.createElement('td')
-                        td.innerHTML = data[j]
-                        tr.appendChild(td)
-                      }
-                      
-                      event.preventDefault() 
-                     })
-                      
-                      
                     </script>
 
                     <script src="plugins/jquery/jquery.min.js"></script>
