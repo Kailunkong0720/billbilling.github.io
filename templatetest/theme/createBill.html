@@ -493,7 +493,7 @@
               expenseJSON.date = document.getElementById("date_picker").value;
               console.log(expenseJSON)
               // 在這裡使用更新後的 expenseJSON 進行 POST 請求
-              /*axios.post('https://billapi-6373626296ec.herokuapp.com/chargeitem', expenseJSON)
+              axios.post('https://billapi-6373626296ec.herokuapp.com/chargeitem', expenseJSON)
                 .then(function (response) {
                   // 成功處理回應
                   console.log('成功:', response.data);
@@ -501,7 +501,7 @@
                 .catch(function (error) {
                   // 錯誤處理
                   console.error('錯誤:', error);
-                });*/
+                });
             });
              
           </script>
