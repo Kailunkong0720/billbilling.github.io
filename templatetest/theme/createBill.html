@@ -226,7 +226,7 @@
                     <dialog id="infoModal" style="left:50%; top: 40%;">
                     <p>	
                       類別: <input id=item1_Text value="">
-                      <input type="button" value="新增" onclick="addOption(type_list1,item1_Text.value, item1_Text.value)">
+                      <input type="button" value="新增" onclick="addOption(tem1_Text.value)">
                     </p>
                     <input type="button" id="close" value="關閉">
                     </dialog>
@@ -360,20 +360,31 @@
                                 <thead>
                                   <tr>
                                     <th></th>
-                                    <th>名稱</th>
+                                    <th>項目名稱</th>
                                     <th>類別</th>
-                                    <!-- <th>Store</th> -->
-                                    <th>日期</th>
-                                    <!-- <th>時間</th> -->
+                                    <th>年</th>
+                                    <th>月</th>
+                                    <th>日</th>
                                     <th>金額</th>
+                                    <th></th>
                                   </tr>
                                 </thead>
                                 <tbody>
                                   <tr>
                                     <tbody></tbody>
                                   </tr>
-                                </div>          
-
+                                </div>     
+                              
+                              <!-- 添加用於編輯的模態框 -->
+                              <div id="editModal" class="modal">
+                                <div class="modal-content">
+                                  <span class="close" onclick="closeModal('editModal')">&times;</span>
+                                  <label for="editInput">項目名稱：</label>
+                                  <input type="text" id="editInput">
+                                  <button id="editButton" onclick="saveEdit()">保存</button>
+                                </div>
+                              </div> 
+                               
           <!-- import axios -->
           <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
           <!-- Get -->
@@ -420,8 +431,120 @@
             }
             
             // 調用 fetchData 函數
-            fetchData();
-               
+            fetchData();async function fetchData() {
+              try {
+                let response = await axios.get('https://billapi-6373626296ec.herokuapp.com/chargeitem');
+                let tbody = document.querySelector('tbody');
+                tbody.innerHTML = ''; // 清除先前的表格內容
+            
+                for (let i = 0; i < response.data.length; i++) {
+                  let expense = response.data[i];
+                  let name = expense.charge_name;
+                  let money = expense.price;
+                  let year = moment.utc(expense.date).format('YYYY');
+                  let month = moment.utc(expense.date).format('MM');
+                  let day = moment.utc(expense.date).format('DD');
+            
+                  let cItems_name = await fetchCItemName(expense.cItems_id);
+            
+                  let item = ['', name, cItems_name, year, month, day, money," "];
+                  let tr = document.createElement('tr');
+            
+                  item.forEach((value, index) => {
+                    let td = document.createElement('td');
+            
+                    if (index === item.length - 1) {
+                      // 在最後一個元素的 td 中添加下拉菜單
+                      let dropdownDiv = document.createElement('div');
+                      dropdownDiv.classList.add('dropdown');
+            
+                      let dropdownToggle = document.createElement('a');
+                      dropdownToggle.classList.add('dropdown-toggle', 'icon-burger-mini');
+                      dropdownToggle.href = '#';
+                      dropdownToggle.role = 'button';
+                      dropdownToggle.id = 'dropdownMenuLink';
+                      dropdownToggle.setAttribute('data-toggle', 'dropdown');
+                      dropdownToggle.setAttribute('aria-haspopup', 'true');
+                      dropdownToggle.setAttribute('aria-expanded', 'false');
+            
+                      dropdownDiv.appendChild(dropdownToggle);
+            
+                      let dropdownMenu = document.createElement('div');
+                      dropdownMenu.classList.add('dropdown-menu', 'dropdown-menu-right');
+                      dropdownMenu.setAttribute('aria-labelledby', 'dropdownMenuLink');
+            
+                      // 添加下拉菜單的內容
+                      let menuItems = ["編輯","刪除"];
+            
+                      menuItems.forEach((item, index) => {
+                        let menuItem = document.createElement('a');
+                        menuItem.classList.add('dropdown-item');
+                        menuItem.href = '#';
+                        menuItem.innerHTML = item;
+                      
+                        // 點擊編輯或刪除時顯示模態框
+                        menuItem.addEventListener('click', function () {
+                          if (index === 0) {
+                            // 編輯
+                            showEditModal(i); // 傳遞當前行的索引
+                          } else if (index === 1) {
+                            // 刪除
+                            showDeleteModal(i); // 傳遞當前行的索引
+                          }
+                        });
+                      
+                        dropdownMenu.appendChild(menuItem);
+                        dropdownDiv.appendChild(dropdownMenu);
+                        td.appendChild(dropdownDiv);
+                      });
+                    } else {
+                      td.innerHTML = value;
+                    }
+            
+                    tr.appendChild(td);
+                  });
+            
+                  tbody.appendChild(tr);
+                }
+              } catch (error) {
+                console.error('Error fetching data:', error);
+              }
+            }
+            function showEditModal(chargeName) {
+              let editModal = document.getElementById('editModal');
+              let editInput = document.getElementById('editInput');
+              let editButton = document.getElementById('editButton');
+          
+              // 將輸入字段填充為現有的 chargeName
+              editInput.value = chargeName;
+          
+              // 向按鈕添加屬性以識別所在的行
+              editButton.setAttribute('data-charge-name', chargeName);
+          
+              // 顯示編輯模態框
+              editModal.style.display = 'block';
+            }
+          
+            // 關閉模態框的函數
+            function closeModal(modalId) {
+              let modal = document.getElementById(modalId);
+              modal.style.display = 'none';
+            }
+          
+            // 保存編輯的函數
+            function saveEdit() {
+              let chargeName = document.getElementById('editButton').getAttribute('data-charge-name');
+              let editedValue = document.getElementById('editInput').value;
+          
+              // 執行保存編輯值的邏輯（例如，更新數據或進行 API 調用）
+              // ...
+          
+              // 保存後，關閉模態框並刷新數據
+              closeModal('editModal');
+              fetchData(); // 假設你有一個用於獲取和顯示數據的函數
+            }
+
+
             async function initialize() {
               await getSorc(); // 等待 getSorc 完成
               updateExpenseJSON(); // getSorc 完成後再執行 updateExpenseJSON
@@ -450,6 +573,7 @@
               }
             }                    
             getSorc();
+            
           </script>
 
           <!-- post -->
@@ -493,7 +617,7 @@
               expenseJSON.date = document.getElementById("date_picker").value;
               console.log(expenseJSON)
               // 在這裡使用更新後的 expenseJSON 進行 POST 請求
-              /*axios.post('https://billapi-6373626296ec.herokuapp.com/chargeitem', expenseJSON)
+              axios.post('https://billapi-6373626296ec.herokuapp.com/chargeitem', expenseJSON)
                 .then(function (response) {
                   // 成功處理回應
                   console.log('成功:', response.data);
@@ -501,9 +625,26 @@
                 .catch(function (error) {
                   // 錯誤處理
                   console.error('錯誤:', error);
-                });*/
+                });
             });
              
+            //post 類別
+            function addOption(text){
+              let cItem={
+                "member_id": 1,
+                "cItems_name": text
+              }
+              axios.post('https://billapi-6373626296ec.herokuapp.com/cItem', cItem)
+              .then(function (response) {
+                // 成功處理回應
+                console.log('成功:', response.data);
+              })
+              .catch(function (error) {
+                // 錯誤處理
+                console.error('錯誤:', error);
+              });
+              getSorc();
+            }                  
           </script>
 
           <script>
@@ -524,14 +665,7 @@
             var yyyy = today.getFullYear();
             today = yyyy + '-' + mm + '-' + dd;
             document.getElementById("date_picker").value = today;
-            //add droplist item
-            function addOption(list, text, value){
-              var index=list.options.length;
-              if(text!=""){
-                list.options[index]=new Option(text, value);
-                list.selectedIndex=index;
-              }
-            }                  
+
           </script>
                     
 

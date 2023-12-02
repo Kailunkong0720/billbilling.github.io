@@ -242,7 +242,7 @@
                             <dialog id="infoModal" style="left:50%; top: 40%;">
                             <p>
                               類別: <input id=item1_Text value="">
-                              <input type="button" value="新增" onclick="addOption(type_list1,item1_Text.value, item1_Text.value)">
+                              <input type="button" value="新增" onclick="addOption(item1_Text.value)">
                             </p>
                             <input type="button" id="close" value="關閉">
                             </dialog>
@@ -513,6 +513,23 @@
                           });
                       });
                        
+                      //post 類別
+                      function addOption(text){
+                        let sorc_Item={
+                          "member_id": 1,
+                          "sorc_Items": text
+                        }
+                        axios.post('https://billapi-6373626296ec.herokuapp.com/Incomsorc', sorc_Item)
+                        .then(function (response) {
+                          // 成功處理回應
+                          console.log('成功:', response.data);
+                        })
+                        .catch(function (error) {
+                          // 錯誤處理
+                          console.error('錯誤:', error);
+                        });
+                        getSorc();
+                      }                  
                     </script>
 
 
@@ -534,14 +551,7 @@
                       var yyyy = today.getFullYear();
                       today = yyyy + '-' + mm + '-' + dd;
                       document.getElementById("date_picker").value = today;
-                      //add droplist item
-                      function addOption(list, text, value){
-                        var index=list.options.length;
-                        if(text!=""){
-                         list.options[index]=new Option(text, value);
-                         list.selectedIndex=index;
-                        }
-                      }
+                     
                     </script>
 
                     <script src="plugins/jquery/jquery.min.js"></script>
