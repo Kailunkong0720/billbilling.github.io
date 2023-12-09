@@ -239,6 +239,7 @@
                         
                         </select>
                             <input type="button" id="show" value="新增類別">
+                            <input type="button" value="刪除類別" onclick="delOption()">
                             <dialog id="infoModal" style="left:50%; top: 40%;">
                             <p>
                               類別: <input id=item1_Text value="">
@@ -373,11 +374,12 @@
                     <thead>
                       <tr>
                         <th></th>
-                        <!-- <th>Name</th> -->
                         <th>類別</th>
-                        <th>日期</th>
-                        <!-- <th>時間</th> -->
+                        <th>年</th>
+                        <th>月</th>
+                        <th>日</th>
                         <th>金額</th>
+                        <th></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -402,6 +404,15 @@
                     <!-- Get -->
                     <script>          
                       //get 帳單        
+                      async function fetchSorcItems(incom_sorc_id) {
+                        try {
+                          let response = await axios.get(`https://billapi-6373626296ec.herokuapp.com/Incomsorc/${incom_sorc_id}`);
+                          return response.data.sorc_Items;
+                        } catch (error) {
+                          console.error('Error fetching sorc_Items:', error);
+                          return ''; // 如果發生錯誤，返回空字符串
+                        }
+                      }
                       async function fetchData() {
                         try {
                           let response = await axios.get('https://billapi-6373626296ec.herokuapp.com/income');
@@ -410,27 +421,183 @@
                       
                           for (let i = 0; i < response.data.length; i++) {
                             let income = response.data[i];
+                            let id = income.income_id;
                             let money = income.price;
-                            let date = moment.utc(income.date).format('YYYY/MM/DD');
+                            let year = moment.utc(income.date).format('YYYY');
+                            let month = moment.utc(income.date).format('MM');
+                            let day = moment.utc(income.date).format('DD');
+
+                            let incomeSorc = await fetchSorcItems(income.incom_sorc_id);
                       
-                            let incomeSorcResponse = await axios.get(`https://billapi-6373626296ec.herokuapp.com/Incomsorc/${income.incom_sorc_id}`);
-                            let incomeSorc = incomeSorcResponse.data.sorc_Items;
-                      
-                            let item = ['', incomeSorc, date, money];
+                            let item = [id,'', incomeSorc,year, month, day, money,""];
                             let tr = document.createElement('tr');
                             
-                            for (let j = 0; j < item.length; j++) {
+                            item.forEach((value, index) => {
                               let td = document.createElement('td');
-                              td.innerHTML = item[j];
+                      
+                              if (index === item.length - 1) {
+                                // 在最後一個元素的 td 中添加下拉菜單
+                                let dropdownDiv = document.createElement('div');
+                                dropdownDiv.classList.add('dropdown');
+                      
+                                let dropdownToggle = document.createElement('a');
+                                dropdownToggle.classList.add('dropdown-toggle', 'icon-burger-mini');
+                                dropdownToggle.href = '#';
+                                dropdownToggle.role = 'button';
+                                dropdownToggle.id = 'dropdownMenuLink';
+                                dropdownToggle.setAttribute('data-toggle', 'dropdown');
+                                dropdownToggle.setAttribute('aria-haspopup', 'true');
+                                dropdownToggle.setAttribute('aria-expanded', 'false');
+                      
+                                dropdownDiv.appendChild(dropdownToggle);
+                      
+                                let dropdownMenu = document.createElement('div');
+                                dropdownMenu.classList.add('dropdown-menu', 'dropdown-menu-right');
+                                dropdownMenu.setAttribute('aria-labelledby', 'dropdownMenuLink');
+                      
+                                // 添加下拉菜單的內容
+                                let menuItems = ["編輯","刪除"];
+                      
+                                menuItems.forEach((item, index) => {
+                                  let menuItem = document.createElement('a');
+                                  menuItem.classList.add('dropdown-item');
+                                  //menuItem.href = '#';
+                                  menuItem.innerHTML = item;
+                                
+                                  // 點擊編輯或刪除時
+                                  menuItem.addEventListener('click', function () {
+                                    if (index === 0) {
+                                      // 編輯
+                                      // 取得當前行的所有 td 元素
+                                      let tds = tr.getElementsByTagName('td');
+                                      let edit=0;
+                                      // 迴圈遍歷 td 元素
+                                      for (let j = 2; j < tds.length - 1; j++) {
+                                        if(j==2){
+                                          if (tds[2].querySelector('select')) {
+                                            // 如果已經是下拉選單，則還原為原始文字內容
+                                            let originalType = tds[2].querySelector('select').value;
+                                            tds[2].innerHTML = originalType;
+                                          } else {
+                                            let select = document.createElement('select');
+                                            select.name = 'editedType'; // 賦予下拉選單一個名稱
+                                            select.style.width = '100px';
+            
+                                            // 將 type_list1 的選項添加到下拉選單
+                                            let typeList1Options = document.getElementById('type_list1').options;
+                                            for (let i = 0; i < typeList1Options.length; i++) {
+                                                let option = document.createElement('option');
+                                                option.value = typeList1Options[i].value;
+                                                option.text = typeList1Options[i].text;
+                                                select.add(option);
+                                            }
+          
+                                          // 選擇下拉選單的預設值為原本的類別
+                                          let originalType = tds[2].innerText;
+                                          select.value = originalType;
+                                          tds[2].innerHTML = '';
+                                          tds[2].appendChild(select);
+                                        }
+                                        }else{
+                                          if (tds[j].querySelector('input')) {
+                                            // 如果已經是 input 元素，則還原為原始文字內容
+                                            let originalText = tds[j].querySelector('input').value;
+                                            tds[j].innerHTML = originalText;
+                                            menuItem.innerHTML = "編輯";
+                                            edit=1;
+                                          } else {
+                                            let input = document.createElement('input');
+                                            input.type = 'text';
+                                            input.value = tds[j].innerText; // 使用原本的內容設定 input 的初始值
+                                            input.style.width = '40px';
+                                            input.required;
+                                            tds[j].innerHTML = ''; // 清空 td 的內容
+                                            tds[j].appendChild(input);
+                                            menuItem.innerHTML = "儲存";
+                                          }
+                                        }                              
+                                      }
+                                      //<!-- put -->
+                                      if(edit==1){
+                                        let updatedData = {
+                                          "incom_sorc_id": null,
+                                          "member_id": 1,
+                                          "price": tds[6].innerText,
+                                          "date": tds[3].innerText+'/'+tds[4].innerText+'/'+tds[5].innerText
+                                        }
+                                        async function updateData() {
+                                          try {
+                                            let selectedOption = tds[2].innerText;
+                                            console.log(selectedOption)
+                                            let response = await axios.get('https://billapi-6373626296ec.herokuapp.com/Incomsorc');
+                                            let selectedSorcItem = response.data.find(item => item.sorc_Items === selectedOption);                 
+                                            // 在此處更新表單
+                                            if (selectedSorcItem) {
+                                              // 更新 incom_sorc_id
+                                              updatedData.incom_sorc_id = selectedSorcItem.incom_sorc_id;
+                                               
+                                            } else {
+                                              console.error('找不到匹配的 incom_sorc。');
+                                            }
+                                          } catch (error) {
+                                            console.error('錯誤:', error);
+                                          }
+                                        }     
+                                        async function Edit() {  
+                                          await updateData();
+                                          console.log(updatedData)
+                                          axios.put(`https://billapi-6373626296ec.herokuapp.com/income/${tds[0].innerText}`, updatedData)
+                                          .then(function (response) {
+                                            console.log('更新成功:', response.data);
+                                          })
+                                          .catch(function (error) {
+                                            console.error('錯誤:', error);
+                                          });
+                                        }
+                                        Edit();
+                                      }
+                                    } else if (index === 1) {
+                                      //<!-- delete -->
+                                      // 刪除
+                                      let answer = confirm('確定要刪除嗎？');
+                                      if(answer){
+                                        Del();
+                                      }
+                                      async function Del() { 
+                                        let tds = tr.getElementsByTagName('td');
+                                        await axios.delete(`https://billapi-6373626296ec.herokuapp.com/income/${tds[0].innerText}`)
+                                        .then(function (response) {
+                                          console.log('刪除成功:', response.data);
+                                        })
+                                        .catch(function (error) {
+                                          console.error('錯誤:', error);
+                                        });
+                                        fetchData();
+                                      }
+                                      
+                                    }
+                                  });
+                                
+                                  dropdownMenu.appendChild(menuItem);
+                                  dropdownDiv.appendChild(dropdownMenu);
+                                  td.appendChild(dropdownDiv);
+                                });
+                              } else {
+                                td.innerHTML = value;
+                              }
+                              //隱藏id
+                              if (index === 0) {
+                                td.style.display = 'none';
+                              }
                               tr.appendChild(td);
-                            }                
+                            });
+                      
                             tbody.appendChild(tr);
                           }
                         } catch (error) {
                           console.error('Error fetching data:', error);
                         }
                       }                     
-                      // 調用 fetchData 函數
                       fetchData();
                          
                       async function initialize() {
@@ -495,22 +662,25 @@
                       }                   
                       const form = document.getElementById('form1');
                       form.addEventListener('submit', (event) => {
-                        event.preventDefault(); // 防止表單提交的默認行為
-                      
+                        event.preventDefault()
                         // 更新 incomeJSON 的其他屬性
                         incomeJSON.price = document.getElementById("money_text").value;
                         incomeJSON.date = document.getElementById("date_picker").value;
                         console.log(incomeJSON)
                         // 在這裡使用更新後的 incomeJSON 進行 POST 請求
-                        axios.post('https://billapi-6373626296ec.herokuapp.com/income', incomeJSON)
-                          .then(function (response) {
-                            // 成功處理回應
-                            console.log('成功:', response.data);
-                          })
-                          .catch(function (error) {
-                            // 錯誤處理
-                            console.error('錯誤:', error);
-                          });
+                        async function AddIcome(){
+                          await axios.post('https://billapi-6373626296ec.herokuapp.com/income', incomeJSON)
+                            .then(function (response) {
+                              // 成功處理回應
+                              console.log('成功:', response.data);
+                            })
+                            .catch(function (error) {
+                              // 錯誤處理
+                              console.error('錯誤:', error);
+                            });
+                          fetchData();
+                        }
+                        AddIcome();
                       });
                        
                       //post 類別
@@ -519,17 +689,55 @@
                           "member_id": 1,
                           "sorc_Items": text
                         }
-                        axios.post('https://billapi-6373626296ec.herokuapp.com/Incomsorc', sorc_Item)
-                        .then(function (response) {
-                          // 成功處理回應
-                          console.log('成功:', response.data);
-                        })
-                        .catch(function (error) {
-                          // 錯誤處理
-                          console.error('錯誤:', error);
-                        });
-                        getSorc();
-                      }                  
+                        checkcItem();
+                        async function checkcItem() {
+                          try {
+                            let selectedOption = text;
+                            console.log(selectedOption)
+                            let response = await axios.get('https://billapi-6373626296ec.herokuapp.com/Incomsorc');
+                            let selectedSorcItem = response.data.find(item => item.sorc_Items === selectedOption);                 
+
+                            if (selectedSorcItem) {
+                              console.error('已存在sorc_Item');
+                            } else {
+                              Addsorc_Item();
+                            }
+                          } catch (error) {
+                            console.error('錯誤:', error);
+                          }
+                        }     
+
+                        async function Addsorc_Item(){
+                          await axios.post('https://billapi-6373626296ec.herokuapp.com/Incomsorc', sorc_Item)
+                          .then(function (response) {
+                            // 成功處理回應
+                            console.log('成功:', response.data);
+                          })
+                          .catch(function (error) {
+                            // 錯誤處理
+                            console.error('錯誤:', error);
+                          });
+                          getSorc();
+                        }
+                      }           
+                      //del 類別
+                      async function delOption(){
+                        let selectedOption = document.getElementById('type_list1').value;
+                        let response = await axios.get('https://billapi-6373626296ec.herokuapp.com/Incomsorc');
+                        let selectedSorcItem = response.data.find(item => item.sorc_Items === selectedOption);                 
+                        if (selectedSorcItem) {
+                          await axios.delete(`https://billapi-6373626296ec.herokuapp.com/Incomsorc/${selectedSorcItem.incom_sorc_id}`)
+                          .then(function (response) {
+                            console.log('成功:', response.data);
+                          })
+                          .catch(function (error) {
+                            console.error('錯誤:', error);
+                          });
+                          getSorc();
+                        } else {
+                          console.error('找不到匹配的 sorc_Items。');
+                        }
+                      }       
                     </script>
 
 
