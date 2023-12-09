@@ -708,20 +708,23 @@
             }        
             //del 類別
             async function delOption(){
-              let selectedOption = document.getElementById('type_list1').value;
-              let response = await axios.get('https://billapi-6373626296ec.herokuapp.com/cItem');
-              let selectedSorcItem = response.data.find(item => item.cItems_name === selectedOption);                 
-              if (selectedSorcItem) {
-                await axios.delete(`https://billapi-6373626296ec.herokuapp.com/cItem/${selectedSorcItem.cItems_id}`)
-                .then(function (response) {
-                  console.log('成功:', response.data);
-                })
-                .catch(function (error) {
-                  console.error('錯誤:', error);
-                });
-                getSorc();
-              } else {
-                console.error('找不到匹配的 cItems。');
+              let answer = confirm('確定要刪除嗎？');
+              if(answer){                                                         
+                let selectedOption = document.getElementById('type_list1').value;
+                let response = await axios.get('https://billapi-6373626296ec.herokuapp.com/cItem');
+                let selectedSorcItem = response.data.find(item => item.cItems_name === selectedOption);                 
+                if (selectedSorcItem) {
+                  await axios.delete(`https://billapi-6373626296ec.herokuapp.com/cItem/${selectedSorcItem.cItems_id}`)
+                  .then(function (response) {
+                    console.log('成功:', response.data);
+                  })
+                  .catch(function (error) {
+                    console.error('錯誤:', error);
+                  });
+                  getSorc();
+                } else {
+                  console.error('找不到匹配的 cItems。');
+                }
               }
             }
           </script>
@@ -791,7 +794,6 @@
                     
                     
                     <script src="js/mono.js"></script>
-                    <script src="js/chart.js"></script>
                     <script src="js/map.js"></script>
                     <script src="js/custom.js"></script>
 
