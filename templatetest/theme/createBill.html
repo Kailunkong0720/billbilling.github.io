@@ -357,6 +357,12 @@
                               <h2>支出</h2>             
                             </div>
                             <div class="card-body">
+                              <div id="productsTable_wrapper" class="dataTables_wrapper no-footer">
+                                <div id="productsTable_filter" class="dataTables_filter">
+                                  <label>
+                                    <input type="search" id="searchInput" placeholder="Search..." aria-controls="productsTable">
+                                  </label>
+                                </div>
                               <table id="productsTable" class="table table-hover table-product" style="width:100%">
                                 <thead>
                                   <tr>
@@ -748,6 +754,43 @@
             today = yyyy + '-' + mm + '-' + dd;
             document.getElementById("date_picker").value = today;
 
+            //搜尋帳單
+            function searchBill(){
+              // 獲取 input 元素
+              const searchInput = document.getElementById('searchInput');
+
+              // 監聽 input 元素的 input 事件
+              searchInput.addEventListener('input', function () {
+                  // 獲取搜索關鍵詞
+                  const searchTerm = searchInput.value.toLowerCase();
+
+                  // 獲取表格的 tbody 元素
+                  const tbody = document.querySelector('tbody');
+
+                  const rows = tbody.getElementsByTagName('tr');
+
+                  for (let i = 0; i < rows.length; i++) {
+                      const row = rows[i];
+                      const cells = row.getElementsByTagName('td');
+
+                      row.style.display = '';
+                      console.log(cells[0].innerText)
+                      // 迭代每一個單元格
+                      for (let j = 2; j < cells.length; j++) {
+                          const cellText = cells[j].textContent || cells[j].innerText;
+                      
+                          // 如果單元格的文本不包含搜索關鍵詞，隱藏該行
+                          if (cellText.toLowerCase().indexOf(searchTerm) === -1) {
+                            row.style.display = 'none';
+                          }else{
+                            row.style.display = '';
+                            break;
+                          }
+                      }
+                  }
+              });
+            }
+            searchBill();
           </script>
                     
 
@@ -774,23 +817,7 @@
                     
                     <script src="plugins/daterangepicker/moment.min.js"></script>
                     <script src="plugins/daterangepicker/daterangepicker.js"></script>
-                    <script>
-                      jQuery(document).ready(function() {
-                        jQuery('input[name="dateRange"]').daterangepicker({
-                        autoUpdateInput: false,
-                        singleDatePicker: true,
-                        locale: {
-                          cancelLabel: 'Clear'
-                        }
-                      });
-                        jQuery('input[name="dateRange"]').on('apply.daterangepicker', function (ev, picker) {
-                          jQuery(this).val(picker.startDate.format('MM/DD/YYYY'));
-                        });
-                        jQuery('input[name="dateRange"]').on('cancel.daterangepicker', function (ev, picker) {
-                          jQuery(this).val('');
-                        });
-                      });
-                    </script>
+                   
                     
                     
                     <script src="js/mono.js"></script>
