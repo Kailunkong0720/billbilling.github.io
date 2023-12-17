@@ -1,34 +1,97 @@
-window.onload=function(){
-    const expense_mon_data=[120,70,300,4000,100,1000,50,32500];
-    const expense_year_data=[12500,35000,20000,10000,8000,15000,6000,7950,34510,135200,21000,10025];
-    const income_mon_data=[176,1760,10000,1584,3520];
-    const income_year_data=[20000,33400,30000,13500,21000,20000,14400,23520,24400,11760,11584,100000];
-    var expense_mon=document.getElementById("total_mon_expense");
-    var expense_year=document.getElementById("total_year_expense");
-    var income_mon=document.getElementById("total_mon_income");
-    var income_year=document.getElementById("total_year_income");
-    var total_expense_mon=0;
-    var total_expense_year=0;
-    var total_income_mon=0;
-    var total_income_year=0;
-    for(let i=0;i<expense_mon_data.length;i++){
-        total_expense_mon+=expense_mon_data[i];
-        //console.log(total_expense_mon);
-    }
-    for(let i=0;i<expense_year_data.length;i++){
-        total_expense_year+=expense_year_data[i];
-        //console.log(total_expense_year);
-    }
-    for(let i=0;i<income_mon_data.length;i++){
-        total_income_mon+=income_mon_data[i];
-       //console.log(total_income_mon);
-    }
-    for(let i=0;i<income_year_data.length;i++){
-        total_income_year+=expense_year_data[i];
-       //console.log(total_income_year);
-    }
-    expense_mon.innerHTML="$"+String(total_expense_mon);
-    expense_year.innerHTML="$"+String(total_expense_year);
-    income_mon.innerHTML="$"+String(total_income_mon);
-    income_year.innerHTML="$"+String(total_income_year);
+window.onload = function () {
+    // Fetch data from the API for income
+    fetch('https://billapi-6373626296ec.herokuapp.com/income')
+        .then(response => response.json())
+        .then(incomeData => {
+            // Calculate total for the current month and year
+            const totalIncomeMon = calculateTotalForCurrentMonth(incomeData);
+            const totalIncomeYear = calculateTotalForCurrentYear(incomeData);
+
+            // Fetch data from the API for charge_item
+            fetch('https://billapi-6373626296ec.herokuapp.com/chargeitem')
+                .then(response => response.json())
+                .then(chargeItemData => {
+                    // Calculate total for the current month and year
+                    const totalChargeMon = calculateTotalForCurrentMonth(chargeItemData);
+                    const totalChargeYear = calculateTotalForCurrentYear(chargeItemData);
+
+                    // Update the HTML elements
+                    var incomeMon = document.getElementById("total_mon_income");
+                    incomeMon.innerHTML = "$" + totalIncomeMon;
+
+                    var incomeYear = document.getElementById("total_year_income");
+                    incomeYear.innerHTML = "$" + totalIncomeYear;
+
+                    var chargeMon = document.getElementById("total_mon_expense");
+                    chargeMon.innerHTML = "$" + totalChargeMon;
+
+                    var chargeYear = document.getElementById("total_year_expense");
+                    chargeYear.innerHTML = "$" + totalChargeYear;
+
+                    // Update the charts
+                    updateChart('myChartIncomeMon', 'Income Mon', [totalIncomeMon]);
+                    updateChart('myChartIncomeYear', 'Income Year', [totalIncomeYear]);
+                    updateChart('myChartExpenseMon', 'Expense Mon', [totalChargeMon]);
+                    updateChart('myChartExpenseYear', 'Expense Year', [totalChargeYear]);
+                })
+                .catch(error => {
+                    console.error('Error fetching charge_item data from API:', error);
+                });
+        })
+        .catch(error => {
+            console.error('Error fetching income data from API:', error);
+        });
+}
+
+// Function to calculate total for the current month
+function calculateTotalForCurrentMonth(data) {
+    // Get the current month
+    const currentMonth = new Date().getMonth();
+
+    // Filter the data to include only entries for the current month
+    const dataForCurrentMonth = data.filter(item => new Date(item.date).getMonth() === currentMonth);
+
+    // Calculate the total for the current month
+    const totalForCurrentMonth = dataForCurrentMonth.reduce((sum, item) => sum + parseFloat(item.price), 0);
+
+    return totalForCurrentMonth;
+}
+
+// Function to calculate total for the current year
+function calculateTotalForCurrentYear(data) {
+    // Get the current year
+    const currentYear = new Date().getFullYear();
+
+    // Filter the data to include only entries for the current year
+    const dataForCurrentYear = data.filter(item => new Date(item.date).getFullYear() === currentYear);
+
+    // Calculate the total for the current year
+    const totalForCurrentYear = dataForCurrentYear.reduce((sum, item) => sum + parseFloat(item.price), 0);
+
+    return totalForCurrentYear;
+}
+
+// Function to update the chart
+function updateChart(chartId, label, data) {
+    var ctx = document.getElementById(chartId).getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: data.map((_, index) => index + 1),
+            datasets: [{
+                label: label,
+                data: data,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
 }
