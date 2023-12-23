@@ -47,12 +47,97 @@
 ====== End ======*/
 
 "use strict";
-const expense_mon_data=[120,70,300,4000,100,1000,50,32500];
-const expense_year_data=[12500,35000,20000,10000,8000,15000,6000,7950,34510,135200,21000,10025];
-const income_mon_data=[176,1760,10000,1584,3520];
-const income_year_data=[20000,33400,30000,13500,21000,20000,14400,23520,24400,11760,11584,100000];
+// const expense_mon_data=[120,70,300,4000,100,1000,50,32500];
+// const expense_year_data=[12500,35000,20000,10000,8000,15000,6000,7950,34510,135200,21000,10025];
+// const income_mon_data=[176,1760,10000,1584,3520];
+// const income_year_data=[20000,33400,30000,13500,21000,20000,14400,23520,24400,11760,11584,100000];
+let income_mon_data, income_year_data, expense_mon_data, expense_year_data;
+// const expense_mon_data=[120,70,300,4000,100,1000,50,32500];
+window.onload = function () {
+  // Fetch data from the API for income
+  fetch('https://billapi-6373626296ec.herokuapp.com/income')
+      .then(response => response.json())
+      .then(incomeData => {
+        income_mon_data = updateChartForCurrentYear(incomeData);
+        income_year_data  = updateChartForCurrentMon(incomeData);
+        const totalIncomeMon = calculateTotalForCurrentMonth(incomeData);
+        const totalIncomeYear = calculateTotalForCurrentYear(incomeData);
+        console.log("Data Type of dataPricesForCurrentMonth:", typeof expense_mon_data);
+
+          // Fetch data from the API for charge_item
+          fetch('https://billapi-6373626296ec.herokuapp.com/chargeitem')
+              .then(response => response.json())
+              .then(chargeItemData => {
+                expense_mon_data = updateChartForCurrentYear(chargeItemData);
+                expense_year_data = updateChartForCurrentMon(chargeItemData);
+                const totalChargeMon = calculateTotalForCurrentMonth(chargeItemData);
+                    const totalChargeYear = calculateTotalForCurrentYear(chargeItemData);
+
+                    // Update the HTML elements
+                    var incomeMon = document.getElementById("total_mon_income");
+                    incomeMon.innerHTML = "$" + totalIncomeMon;
+
+                    var incomeYear = document.getElementById("total_year_income");
+                    incomeYear.innerHTML = "$" + totalIncomeYear;
+
+                    var chargeMon = document.getElementById("total_mon_expense");
+                    chargeMon.innerHTML = "$" + totalChargeMon;
+
+                    var chargeYear = document.getElementById("total_year_expense");
+                    chargeYear.innerHTML = "$" + totalChargeYear;
+                renderChart();
+              })
+              .catch(error => {
+                  console.error('Error fetching charge_item data from API:', error);
+              });
+      })
+      .catch(error => {
+          console.error('Error fetching income data from API:', error);
+      });
+}
+// Function to calculate total for the current month
+function calculateTotalForCurrentMonth(data) {
+  // Get the current month
+  const currentMonth = new Date().getMonth();
+
+  // Filter the data to include only entries for the current month
+  const dataForCurrentMonth = data.filter(item => new Date(item.date).getMonth() === currentMonth);
+
+  // Calculate the total for the current month
+  const totalForCurrentMonth = dataForCurrentMonth.reduce((sum, item) => sum + parseFloat(item.price), 0);
+  
+  return totalForCurrentMonth;
+}
+
+// Function to calculate total for the current year
+function calculateTotalForCurrentYear(data) {
+  // Get the current year
+  const currentYear = new Date().getFullYear();
+
+  // Filter the data to include only entries for the current year
+  const dataForCurrentYear = data.filter(item => new Date(item.date).getFullYear() === currentYear);
+  // Calculate the total for the current year
+  const totalForCurrentYear = dataForCurrentYear.reduce((sum, item) => sum + parseFloat(item.price), 0);
+
+  return totalForCurrentYear;
+}
+
+function updateChartForCurrentMon(data) {
+  const currentMonth = new Date().getMonth();
+  const dataForCurrentMonth = data.filter(item => new Date(item.date).getMonth() === currentMonth);
+  const dataPricesForCurrentMonth = dataForCurrentMonth.map(item => parseFloat(item.price));
+  return Object.values(dataPricesForCurrentMonth);
+}
+
+function updateChartForCurrentYear(data) {
+  const currentYear = new Date().getFullYear();
+  const dataForCurrentYear = data.filter(item => new Date(item.date).getFullYear() === currentYear);
+  const dataPricesForCurrentYear = dataForCurrentYear.map(item => parseFloat(item.price));
+  return Object.values(dataPricesForCurrentYear);
+}
 
 /*======== 1. SPLINA AREA CHART 01 ========*/
+ function renderChart() {
 var splinaArea1 = document.querySelector("#spline-area-1");
 if (splinaArea1 !== null) {
   var splinaAreaOptions1 = {
@@ -107,9 +192,11 @@ if (splinaArea1 !== null) {
     series: [
       {
         data: expense_mon_data,
+       
       },
     ],
   };
+
   var randerSplinaArea1 = new ApexCharts(splinaArea1, splinaAreaOptions1);
   randerSplinaArea1.render();
 }
@@ -1526,6 +1613,7 @@ if (tableSmBarChart15 !== null) {
   );
   randerTblSmChart15.render();
 }
+
 /*======== 9.1 STATUS SMALL BAR CHART 01  ========*/
 var statusSmBarChart1 = document.querySelector("#status-sm-chart-01");
 if (statusSmBarChart1 !== null) {
@@ -2499,4 +2587,5 @@ if (ariaChartExample !== null) {
   var chart = new ApexCharts(ariaChartExample, options);
 
   chart.render();
+}
 }

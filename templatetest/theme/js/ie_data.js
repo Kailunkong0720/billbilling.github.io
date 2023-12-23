@@ -1,3 +1,4 @@
+
 window.onload = function () {
     // Fetch data from the API for income
     fetch('https://billapi-6373626296ec.herokuapp.com/income')
@@ -29,10 +30,13 @@ window.onload = function () {
                     chargeYear.innerHTML = "$" + totalChargeYear;
 
                     // Update the charts
-                    updateChart('myChartIncomeMon', 'Income Mon', [totalIncomeMon]);
-                    updateChart('myChartIncomeYear', 'Income Year', [totalIncomeYear]);
-                    updateChart('myChartExpenseMon', 'Expense Mon', [totalChargeMon]);
-                    updateChart('myChartExpenseYear', 'Expense Year', [totalChargeYear]);
+                   const income_year = updateChartForCurrentYear(incomeData);
+                   const income_month = updateChartForCurrentMon(incomeData);
+                    console.log(income_year);
+                    console.log(income_month);
+                    // updateChart([incomeData]);
+                    // updateChart([totalChargeMon]);
+                    // updateChart([totalChargeYear]);
                 })
                 .catch(error => {
                     console.error('Error fetching charge_item data from API:', error);
@@ -53,7 +57,7 @@ function calculateTotalForCurrentMonth(data) {
 
     // Calculate the total for the current month
     const totalForCurrentMonth = dataForCurrentMonth.reduce((sum, item) => sum + parseFloat(item.price), 0);
-
+    
     return totalForCurrentMonth;
 }
 
@@ -64,7 +68,6 @@ function calculateTotalForCurrentYear(data) {
 
     // Filter the data to include only entries for the current year
     const dataForCurrentYear = data.filter(item => new Date(item.date).getFullYear() === currentYear);
-
     // Calculate the total for the current year
     const totalForCurrentYear = dataForCurrentYear.reduce((sum, item) => sum + parseFloat(item.price), 0);
 
@@ -72,26 +75,25 @@ function calculateTotalForCurrentYear(data) {
 }
 
 // Function to update the chart
-function updateChart(chartId, label, data) {
-    var ctx = document.getElementById(chartId).getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: data.map((_, index) => index + 1),
-            datasets: [{
-                label: label,
-                data: data,
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
+function updateChartForCurrentYear(data) {
+     // Get the current year
+     const currentYear = new Date().getFullYear();
+     // Filter the data to include only entries for the current year
+     const dataForCurrentYear = data.filter(item => new Date(item.date).getFullYear() === currentYear);
+     const dataPricesForCurrentYear = dataForCurrentYear.map(item => parseFloat(item.price));
+
+     // Return the array of prices
+     return dataPricesForCurrentYear;
+   
+}
+function updateChartForCurrentMon(data) {
+    // Get the current year
+    const currentMonth = new Date().getMonth();
+    // Filter the data to include only entries for the current year
+    const dataForCurrentMonth = data.filter(item => new Date(item.date).getMonth() === currentMonth);
+    const dataPricesForCurrentMonth = dataForCurrentMonth.map(item => parseFloat(item.price));
+
+    // Return the array of prices
+    return dataPricesForCurrentMonth;
+  
 }
