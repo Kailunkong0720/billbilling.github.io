@@ -21,18 +21,8 @@ window.onload = function () {
                     const totalChargeYear = calculateTotalForCurrentYear(chargeItemData);
 
                     // Update the HTML elements
-                    var incomeMon = document.getElementById("total_mon_income");
-                    incomeMon.innerHTML = "$" + totalIncomeMon;
-
-                    var incomeYear = document.getElementById("total_year_income");
-                    incomeYear.innerHTML = "$" + totalIncomeYear;
-
-                    var chargeMon = document.getElementById("total_mon_expense");
-                    chargeMon.innerHTML = "$" + totalChargeMon;
-
-                    var chargeYear = document.getElementById("total_year_expense");
-                    chargeYear.innerHTML = "$" + totalChargeYear;
-                renderChart();
+                    
+                     getRev();;
               })
               .catch(error => {
                   console.error('Error fetching charge_item data from API:', error);
@@ -42,6 +32,7 @@ window.onload = function () {
           console.error('Error fetching income data from API:', error);
       });
       fetchGoal();
+
 }
 // Function to calculate total for the current month
 function calculateTotalForCurrentMonth(data) {
@@ -83,36 +74,75 @@ function updateChartForCurrentYear(data) {
   const dataPricesForCurrentYear = dataForCurrentYear.map(item => parseFloat(item.price));
   return Object.values(dataPricesForCurrentYear);
 }
-var profits = [0,0,0,0,0,0,0,0,0,0,0,0];
-for(let i=0;i<12;i++){
-  profits[i]=(income_year_data[i]-expense_year_data[i]);
-  console.log(profits[i])
-}
-var rev=0;
-for(let i =0;i<profits.length;i++){
-  if(!isNaN(profits[i])){
-    rev+=profits[i];
-  }
 
+var profits = [0,0,0,0,0,0,0,0,0,0,0,0];
+var rev=0;
+function getRev(){
+  for(let i=0;i<12;i++){
+    profits[i]=(income_year_data[i]-expense_year_data[i]);
+  }
+  console.log(profits[0])
+  for(let i =0;i<profits.length;i++){
+    if(!isNaN(profits[i])){
+      rev+=profits[i];
+    }
+
+  }
+  console.log(rev)
+  Load_pic();
 }
-console.log(rev)
+
 var userGoal=null;
 async function fetchGoal(){
   try{
-      let response = await axios.get('https://billapi-6373626296ec.herokuapp.com/member');
+      let response = await axios.get('https://billapi-6373626296ec.herokuapp.com/members');
       for (let i = 0; i < response.data.length; i++) {
           if(response.data[i].member_id==1){
             userGoal=response.data[i].goal;
+            break;
           }
       }
   }catch (error) {
                         // 錯誤處理
    console.error('錯誤:', error);
   }
-   Load_pic();
+ 
   }
+  let GoalJSON={
+    'member_id':1,
+    'acc_name':"test2222",
+    'password':"test",
+    'goal':null,
+    'picture':null
+};
+  async function Enter_goal(){
+    var goal = prompt("輸入存款目標", "1000");
+    if(!isNaN(goal)&&goal>0){
+    GoalJSON.goal=goal;
+    console.log(GoalJSON.goal)
+    AddGoal();
+    }
+    else{
+    alert("請輸入大於0的整數")
+    }
+  }
+  async function AddGoal(){
+  // 在這裡使用更新後的 expenseJSON 進行 POST 請求
+    axios.put('https://billapi-6373626296ec.herokuapp.com/members/1', GoalJSON)
+    .then(function (response) {
+    // 成功處理回應
+    fetchGoal();
+    console.log('成功:', response.data);
+    })
+    .catch(function (error) {
+    // 錯誤處理
+    console.error('錯誤:', error);
+    });
+  }
+var clock = setInterval(Load_pic , 1000);
   function Load_pic(){
-    console.log(userGoal)                   
+    console.log(userGoal)        
+    console.log(rev)           
     var percent=document.getElementById("tree");
     console.log(percent)
     var p=rev/parseInt(userGoal);
@@ -130,3 +160,4 @@ async function fetchGoal(){
       percent.src="images/大樹.jpg"
     }
   }
+  
