@@ -94,6 +94,7 @@ window.onload = function () {
       .catch(error => {
           console.error('Error fetching income data from API:', error);
       });
+
       fetchGoal();
 }
 // Function to calculate total for the current month
@@ -136,7 +137,25 @@ function updateChartForCurrentYear(data) {
   const dataPricesForCurrentYear = dataForCurrentYear.map(item => parseFloat(item.price));
   return Object.values(dataPricesForCurrentYear);
 }
+var goal;
 
+async function fetchGoal(){
+  try{
+    let response = await axios.get('https://billapi-6373626296ec.herokuapp.com/members');
+    for (let i = 0; i < response.data.length; i++) {
+        if(response.data[i].member_id==1){
+          goal=response.data[i].goal;
+          break;
+        }
+    }
+    }catch (error) {
+                          // 錯誤處理
+    console.error('錯誤:', error);
+    }
+   //Load_pic();
+   
+  document.getElementById("goal").innerHTML=goal;
+  }
 /*======== 1. SPLINA AREA CHART 01 ========*/
  function renderChart() {
 var splinaArea1 = document.querySelector("#spline-area-1");
@@ -501,22 +520,7 @@ if (mixedChart1 !== null) {
   var randerMixedChart1 = new ApexCharts(mixedChart1, mixedOptions1);
   randerMixedChart1.render();
 }
-var goal;
-async function fetchGoal(){
-  try{
-      let response = await axios.get('https://billapi-6373626296ec.herokuapp.com/member');
-      for (let i = 0; i < response.data.length; i++) {
-          if(response.data[i].member_id==1){
-            goal=response.data[i].goal;
-          }
-      }
-  }catch (error) {
-                        // 錯誤處理
-   console.error('錯誤:', error);
-  }
-   //Load_pic();
-  }
-  document.getElementById("goal").innerHTML=goal;
+
 /*======== 6. RADIAL BAR CHART 01 ========*/
 var radialBarChart1 = document.querySelector("#radial-bar-chart-1");
 var revenue=0;
