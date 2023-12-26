@@ -84,9 +84,9 @@ function updateChartForCurrentYear(data) {
   return Object.values(dataPricesForCurrentYear);
 }
 var profits = [0,0,0,0,0,0,0,0,0,0,0,0];
-var rev=0
 for(let i=0;i<12;i++){
   profits[i]=(income_year_data[i]-expense_year_data[i]);
+  console.log(profits[i])
 }
 var rev=0;
 for(let i =0;i<profits.length;i++){
@@ -95,6 +95,7 @@ for(let i =0;i<profits.length;i++){
   }
 
 }
+console.log(rev)
 var userGoal=null;
 async function fetchGoal(){
   try{
@@ -115,7 +116,6 @@ async function fetchGoal(){
     var percent=document.getElementById("tree");
     console.log(percent)
     var p=rev/parseInt(userGoal);
-    console.log(rev)
     console.log(p)
     if(rev == 0||isNaN(userGoal)||p < 0.25){
       percent.src="images/樹苗.png";
