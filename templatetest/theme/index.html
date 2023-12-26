@@ -56,19 +56,11 @@
   <!-- FAVICON -->
   <link href="images/favicon.png" rel="shortcut icon" />
 
-  <!--
-    HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
-  -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
+  
   <script src="plugins/nprogress/nprogress.js"></script>
   <script src="https://cdn.staticfile.org/jquery/2.2.4/jquery.min.js"></script>
   <script src="js/ie_data.js"></script>
-  <script src="js/print.js"></script>
-  
+  <!--<script src="js/print.js"></script>-->
 </head>
 
 
@@ -104,9 +96,6 @@
             <div class="sidebar-left" data-simplebar style="height: 100%;">
               <!-- sidebar menu -->
               <ul class="nav sidebar-inner" id="sidebar-menu">
-                
-
-                 
                 <li
                 class="active"
                 >
@@ -128,7 +117,12 @@
                       <span class="nav-text">新增帳單</span>
                     </a>
                   </li>
-                
+                  <li class="active">
+                    <a class="sidenav-item-link" href="game.html">
+                      <i class="mdi mdi-chart-line"></i>
+                      <span class="nav-text">新增目標</span>
+                    </a>
+                  </li>
 
                 
 
@@ -159,78 +153,6 @@
 
                 
 
-                
-                
-
-<!--                
-                
-
-                
-                  <li  class="has-sub" >
-                    <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#other-page"
-                      aria-expanded="false" aria-controls="other-page">
-                      <i class="mdi mdi-file-multiple"></i>
-                      <span class="nav-text">Other pages</span> <b class="caret"></b>
-                    </a>
-                    <ul  class="collapse"  id="other-page"
-                      data-parent="#sidebar-menu">
-                      <div class="sub-menu">
-                        
-                        
-                          
-                            <li >
-                              <a class="sidenav-item-link" href="invoice.html">
-                                <span class="nav-text">Invoice</span>
-                                
-                              </a>
-                            </li>
-                          
-                        
-
-                        
-                        
-                          
-                            <li >
-                              <a class="sidenav-item-link" href="404.html">
-                                <span class="nav-text">404 page</span>
-                                
-                              </a>
-                            </li>
-                          
-                        
-
-                        
-                        
-                          
-                            <li >
-                              <a class="sidenav-item-link" href="page-comingsoon.html">
-                                <span class="nav-text">Coming Soon</span>
-                                
-                              </a>
-                            </li>
-                          
-                        
-
-                        
-                        
-                          
-                            <li >
-                              <a class="sidenav-item-link" href="page-maintenance.html">
-                                <span class="nav-text">Maintenance</span>
-                                
-                              </a>
-                            </li>
-                          
-                        
-
-                        
-                      </div>
-                    </ul>
-                  </li>
-                 -->
-
-
-      
           </div>
         </aside>
 
@@ -239,7 +161,7 @@
       <!-- ====================================
       ——— PAGE WRAPPER
       ===================================== -->
-      <div class="page-wrapper">
+      <div class="page-wrapper print-background">
         
           <!-- Header -->
           <header class="main-header" id="header">
@@ -253,7 +175,7 @@
 
               <div class="navbar-right ">
 
-             
+  
                   </li>
                 </ul>
               </div>
@@ -273,19 +195,10 @@
                       <div class="card card-default card-mini">
                         <div class="card-header">
                           <h2 id="total_mon_expense"></h2>
-                          <div class="dropdown">
-                            <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                              <a class="dropdown-item" href="#">Action</a>
-                              <a class="dropdown-item" href="#">Another action</a>
-                              <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                          </div>
+                          
                           <div class="sub-title">
-                            <span class="mr-1">Expense of This Month</span> |
-                            <span class="mx-1">45%</span>
+                            <span class="mr-1">本月支出</span>
+                            <!--<span class="mx-1">45%</span>-->
                             <!--<i class="mdi mdi-arrow-up-bold text-success"></i>-->
                           </div>
                         </div>
@@ -302,19 +215,10 @@
                       <div class="card card-default card-mini">
                         <div class="card-header">
                           <h2 id="total_year_expense"></h2>
-                          <div class="dropdown">
-                            <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                              <a class="dropdown-item" href="#">Action</a>
-                              <a class="dropdown-item" href="#">Another action</a>
-                              <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                          </div>
+                          
                           <div class="sub-title">
-                            <span class="mr-1">Expense of this year</span> |
-                            <span class="mx-1">50%</span>
+                            <span class="mr-1">今年支出</span> 
+                            <!--<span class="mx-1">50%</span>-->
                             <!--<i class="mdi mdi-arrow-down-bold text-danger"></i>-->
                           </div>
                         </div>
@@ -331,19 +235,10 @@
                       <div class="card card-default card-mini">
                         <div class="card-header">
                           <h2 id="total_mon_income"></h2>
-                          <div class="dropdown">
-                            <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                              <a class="dropdown-item" href="#">Action</a>
-                              <a class="dropdown-item" href="#">Another action</a>
-                              <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                          </div>
+                          
                           <div class="sub-title">
-                            <span class="mr-1">Income of This Month</span> |
-                            <span class="mx-1">20%</span>
+                            <span class="mr-1">本月收入</span>
+                            <!--<span class="mx-1">20%</span>-->
                             <!--<i class="mdi mdi-arrow-down-bold text-danger"></i>-->
                           </div>
                         </div>
@@ -360,19 +255,10 @@
                       <div class="card card-default card-mini">
                         <div class="card-header">
                           <h2 id="total_year_income"></h2>
-                          <div class="dropdown">
-                            <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                              <a class="dropdown-item" href="#">Action</a>
-                              <a class="dropdown-item" href="#">Another action</a>
-                              <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                          </div>
+                          
                           <div class="sub-title">
-                            <span class="mr-1">Revenue of this year</span> |
-                            <span class="mx-1">35%</span>
+                            <span class="mr-1">今年收入</span>
+                            <!--<span class="mx-1">35%</span>-->
                             <!--<i class="mdi mdi-arrow-up-bold text-success"></i>-->
                           </div>
                         </div>
@@ -394,18 +280,8 @@
                     <!-- Income and Express -->
                     <div class="card card-default">
                       <div class="card-header">
-                        <h2>Income And Expenses</h2>
-                        <div class="dropdown">
-                          <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false" data-display="static">
-                          </a>
-
-                          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                          </div>
-                        </div>
+                        <h2>支出&收入分析</h2>
+                        
 
                       </div>
                       <div class="card-body">
@@ -419,19 +295,7 @@
 
                   </div>
                   <div class="col-xl-4">
-                    <!-- Current Users  -->
-                    <!--<div class="card card-default">
-                      <div class="card-header">
-                        <h2>Current Users</h2>
-                        <span>Realtime</span>
-                      </div>
-                      <div class="card-body">
-                        <div id="barchartlg2"></div>
-                      </div>
-                      <div class="card-footer bg-white py-4">
-                        <a href="#" class="text-uppercase">Current Users Overview</a>
-                      </div>
-                    </div>-->
+                    
                     <div class="card card-default">
                       <div class="card-header justify-content-center">
                         <h2>離目標距離</h2>
@@ -442,7 +306,7 @@
                         </div>
                         <div class="radial-bar-chart-footer">
                           <div class="title-large" id="revenue"> <!--<i class="mdi mdi-arrow-up text-success"></i>--></div>
-                          <div class="title-small" id="goal">vs $12,600 (goal)</div>
+                          <div class="title-small" id="goal"></div>
                         </div>
                       </div>
                     </div>
@@ -456,652 +320,58 @@
                   <div class="col-12">
                     <div class="card card-default">
                       <div class="card-header">
-                        <h2>支出</h2>
+                        <h2>支出</h2>    
                         <div class="dropdown">
                           <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false"> Yearly Chart
+                            aria-expanded="false"> 支出
                           </a>
-
-                          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                          <div class="dropdown-menu dropdown-menu-right no-print" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="index_income.html">收入</a>
                           </div>
-                        </div>
+                        </div>         
                       </div>
                       <div class="card-body">
-                        <table id="productsTable" class="table table-hover table-product" style="width:100%">
-                          <thead>
-                            <tr>
-                              <th></th>
-                              <th>項目名稱</th>
-                              <th>類別</th>
-                              <th>年</th>
-                              <th>月</th>
-                              <th>日</th>
-                              <!--<th>Daily Sale</th>
-                              <th>Sold</th>-->
-                              
-                              <th>金額</th>
-                              <th></th>
-                            </tr>
-                          </thead>
-                          <tbody>
-
-                            <tr>
-                              <td class="py-0">
-                                <img src="images/products/products-xs-01.jpg" alt="Product Image">
-                              </td>
-                              <td>Coach Swagger</td>
-                              <td>服飾</td>
-                              <td>2023</td>
-                              <td>10</td>
-                              <td>2</td>
-                              <!--<td>
-                                <div id="tbl-chart-01"></div>
-                              </td>
-                              <td>4</td>-->
-                             
-                              <td>180</td>
-                              <td>
-                                <div class="dropdown">
-                                  <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                  </a>
-
-                                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-
-                            <tr>
-                              <td class="py-0">
-                                <img src="images/products/products-xs-02.jpg" alt="Product Image">
-                              </td>
-                              <td>Earphone</td>
-                              <td>電子</td>
-                              <td>2023</td>
-                              <td>7</td>
-                              <td>5</td>
-                              <!--<td>
-                                <div id="tbl-chart-02"></div>
-                              </td>
-                              <td>1</td>-->
-                              
-                              <td>1400</td>
-                              <td>
-                                <div class="dropdown">
-                                  <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                  </a>
-
-                                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-
-                            <tr>
-                              <td class="py-0">
-                                <img src="images/products/products-xs-03.jpg" alt="Product Image">
-                              </td>
-                              <td>Hat Black Suits</td>
-                              <td>包包</td>
-                              <td>2023</td>
-                              <td>3</td>
-                              <td>7</td>
-                              <!--<td>
-                                <div id="tbl-chart-03"></div>
-                              </td>
-                              <td>6</td>-->
-                              
-                              <td>260</td>
-                              <td>
-                                <div class="dropdown">
-                                  <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                  </a>
-
-                                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-
-                            <tr>
-                              <td class="py-0">
-                                <img src="images/products/products-xs-04.jpg" alt="Product Image">
-                              </td>
-                              <td>Backpack Gents</td>
-                              <td>電子</td>
-                              <td>2023</td>
-                              <td>8</td>
-                              <td>3</td>
-                              <!--<td>
-                                <div id="tbl-chart-04"></div>
-                              </td>
-                              <td>6</td>-->
-                              
-                              <td>700</td>
-                              <td>
-                                <div class="dropdown">
-                                  <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                  </a>
-
-                                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-
-                            <tr>
-                              <td class="py-0">
-                                <img src="images/products/products-xs-05.jpg" alt="Product Image">
-                              </td>
-                              <td>Speed 500 Ignite</td>
-                              <td>電子</td>
-                              <td>2023</td>
-                              <td>3</td>
-                              <td>4</td>
-                              <!--<td>
-                                <div id="tbl-chart-05"></div>
-                              </td>
-                              <td>8</td>-->
-                              
-                              <td>42000</td>
-                              <td>
-                                <div class="dropdown">
-                                  <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                  </a>
-
-                                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-
-                            <tr>
-                              <td class="py-0">
-                                <img src="images/products/products-xs-06.jpg" alt="Product Image">
-                              </td>
-                              <td>Olay</td>
-                              <td>包包</td>
-                              <td>2023</td>
-                              <td>6</td>
-                              <td>6</td>
-                              <!--<td>
-                                <div id="tbl-chart-06"></div>
-                              </td>
-                              <td>79</td>-->
-                              
-                              <td>12</td>
-                              <td>
-                                <div class="dropdown">
-                                  <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                  </a>
-
-                                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-
-                          
-
-                            <tr>
-                              <td class="py-0">
-                                <img src="images/products/products-xs-08.jpg" alt="Product Image">
-                              </td>
-                              <td>Surface Laptop 2</td>
-                              <td>電子</td>
-                              <td>2023</td>
-                              <td>1</td>
-                              <td>9</td>
-                              <!--<td>
-                                <div id="tbl-chart-08"></div>
-                              </td>
-                              <td>38</td>-->
-                              
-                              <td>5</td>
-                              <td>
-                                <div class="dropdown">
-                                  <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                  </a>
-
-                                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-
-                            <tr>
-                              <td class="py-0">
-                                <img src="images/products/products-xs-09.jpg" alt="Product Image">
-                              </td>
-                              <td>TIGI Bed Head Superstar Queen</td>
-                              <td>電子</td>
-                              <td>2023</td>
-                              <td>9</td>
-                              <td>15</td>
-                              <!--<td>
-                                <div id="tbl-chart-09"></div>
-                              </td>
-                              <td>6</td>-->
-                              
-                              <td>46</td>
-                              <td>
-                                <div class="dropdown">
-                                  <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                  </a>
-
-                                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-
-                            <tr>
-                              <td class="py-0">
-                                <img src="images/products/products-xs-10.jpg" alt="Product Image">
-                              </td>
-                              <td>Wattbike Atom</td>
-                              <td>美妝</td>
-                              <td>2023</td>
-                              <td>5</td>
-                              <td>6</td>
-                          
-                              
-                              <td>19</td>
-                              <td>
-                                <div class="dropdown">
-                                  <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                  </a>
-
-                                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-
-                          
-                        </table>
-
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-
-
-                <div class="row">
-                  <div class="col-12">
-                    <div class="card card-default">
-                      <div class="card-header">
-                        <h2>支出</h2>
-                        <div class="dropdown">
-                          <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false"> Yearly Chart
-                          </a>
-
-                          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                        <div id="productsTable_wrapper" class="dataTables_wrapper no-footer">
+                          <div id="productsTable_filter" class="dataTables_filter">
+                            <label>
+                              <input type="search" id="searchInput" placeholder="Search..." aria-controls="productsTable">
+                            </label>
                           </div>
-                        </div>
-                      </div>
-                      <div class="card-body">
-                        <table id="productsTable" class="table table-hover table-product" style="width:100%">
-                          <thead>
-                            <tr>
-                              <th></th>
-                              <th>項目名稱</th>
-                              <th>類別</th>
-                              <th>年</th>
-                              <th>月</th>
-                              <th>日</th>
-                              <!--<th>Daily Sale</th>
-                              <th>Sold</th>-->
-                              
-                              <th>金額</th>
-                              <th></th>
-                            </tr>
-                          </thead>
-                          <tbody>
-
-                            <tr>
-                              <td class="py-0">
-                                <img src="images/products/products-xs-01.jpg" alt="Product Image">
-                              </td>
-                              <td>Coach Swagger</td>
-                              <td>服飾</td>
-                              <td>2023</td>
-                              <td>10</td>
-                              <td>2</td>
-                              <!--<td>
-                                <div id="tbl-chart-01"></div>
-                              </td>
-                              <td>4</td>-->
-                             
-                              <td>180</td>
-                              <td>
-                                <div class="dropdown">
-                                  <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                  </a>
-
-                                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-
-                            <tr>
-                              <td class="py-0">
-                                <img src="images/products/products-xs-02.jpg" alt="Product Image">
-                              </td>
-                              <td>Earphone</td>
-                              <td>電子</td>
-                              <td>2023</td>
-                              <td>7</td>
-                              <td>5</td>
-                              <!--<td>
-                                <div id="tbl-chart-02"></div>
-                              </td>
-                              <td>1</td>-->
-                              
-                              <td>1400</td>
-                              <td>
-                                <div class="dropdown">
-                                  <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                  </a>
-
-                                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-
-                            <tr>
-                              <td class="py-0">
-                                <img src="images/products/products-xs-03.jpg" alt="Product Image">
-                              </td>
-                              <td>Hat Black Suits</td>
-                              <td>包包</td>
-                              <td>2023</td>
-                              <td>3</td>
-                              <td>7</td>
-                              <!--<td>
-                                <div id="tbl-chart-03"></div>
-                              </td>
-                              <td>6</td>-->
-                              
-                              <td>260</td>
-                              <td>
-                                <div class="dropdown">
-                                  <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                  </a>
-
-                                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-
-                            <tr>
-                              <td class="py-0">
-                                <img src="images/products/products-xs-04.jpg" alt="Product Image">
-                              </td>
-                              <td>Backpack Gents</td>
-                              <td>電子</td>
-                              <td>2023</td>
-                              <td>8</td>
-                              <td>3</td>
-                              <!--<td>
-                                <div id="tbl-chart-04"></div>
-                              </td>
-                              <td>6</td>-->
-                              
-                              <td>700</td>
-                              <td>
-                                <div class="dropdown">
-                                  <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                  </a>
-
-                                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-
-                            <tr>
-                              <td class="py-0">
-                                <img src="images/products/products-xs-05.jpg" alt="Product Image">
-                              </td>
-                              <td>Speed 500 Ignite</td>
-                              <td>電子</td>
-                              <td>2023</td>
-                              <td>3</td>
-                              <td>4</td>
-                              <!--<td>
-                                <div id="tbl-chart-05"></div>
-                              </td>
-                              <td>8</td>-->
-                              
-                              <td>42000</td>
-                              <td>
-                                <div class="dropdown">
-                                  <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                  </a>
-
-                                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-
-                            <tr>
-                              <td class="py-0">
-                                <img src="images/products/products-xs-06.jpg" alt="Product Image">
-                              </td>
-                              <td>Olay</td>
-                              <td>包包</td>
-                              <td>2023</td>
-                              <td>6</td>
-                              <td>6</td>
-                              <!--<td>
-                                <div id="tbl-chart-06"></div>
-                              </td>
-                              <td>79</td>-->
-                              
-                              <td>12</td>
-                              <td>
-                                <div class="dropdown">
-                                  <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                  </a>
-
-                                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-
-                          
-
-                            <tr>
-                              <td class="py-0">
-                                <img src="images/products/products-xs-08.jpg" alt="Product Image">
-                              </td>
-                              <td>Surface Laptop 2</td>
-                              <td>電子</td>
-                              <td>2023</td>
-                              <td>1</td>
-                              <td>9</td>
-                              <!--<td>
-                                <div id="tbl-chart-08"></div>
-                              </td>
-                              <td>38</td>-->
-                              
-                              <td>5</td>
-                              <td>
-                                <div class="dropdown">
-                                  <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                  </a>
-
-                                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-
-                            <tr>
-                              <td class="py-0">
-                                <img src="images/products/products-xs-09.jpg" alt="Product Image">
-                              </td>
-                              <td>TIGI Bed Head Superstar Queen</td>
-                              <td>電子</td>
-                              <td>2023</td>
-                              <td>9</td>
-                              <td>15</td>
-                              <!--<td>
-                                <div id="tbl-chart-09"></div>
-                              </td>
-                              <td>6</td>-->
-                              
-                              <td>46</td>
-                              <td>
-                                <div class="dropdown">
-                                  <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                  </a>
-
-                                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-
-                            <tr>
-                              <td class="py-0">
-                                <img src="images/products/products-xs-10.jpg" alt="Product Image">
-                              </td>
-                              <td>Wattbike Atom</td>
-                              <td>美妝</td>
-                              <td>2023</td>
-                              <td>5</td>
-                              <td>6</td>
-                          
-                              
-                              <td>19</td>
-                              <td>
-                                <div class="dropdown">
-                                  <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                  </a>
-
-                                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-
-                          
-                        </table>
-
+                          <table id="productsTable" class="table table-hover table-product" style="width:100%">
+                            <thead>
+                              <tr>
+                                <th></th>
+                                <th>項目名稱</th>
+                                <th>類別</th>
+                                <th>年</th>
+                                <th>月</th>
+                                <th>日</th>
+                                <th>金額</th>
+                                <th></th>
+                              </tr>
+                            </thead>
+                              <tr>
+                                <tbody></tbody>
+                              </tr>
+                          </table>
+                        </div>     
+                        
                       </div>
                     </div>
-                  </div>
-                </div>
-
-
-                
-
-
-
-
-
-
-
-
-
-                
-         
+                  </div>  
+               
+              </div>
+            <button id="downloadBtn" onclick="window.print()">列印成PDF檔</button>
           </div>
-          <button id="downloadBtn">列印成PDF檔</button>
-        </div>
+                         
+    
+                      
         
           <!-- Footer -->
           <footer class="footer mt-auto">
             <div class="copyright bg-white">
               <p>
-                &copy; <span id="copy-year"></span> Copyright project by <a class="text-primary" href="team.html" target="_blank" >Group 8</a>.
+                &copy; <span id="copy-year"></span> Copyright project by <a class="text-primary" href="http://www.kailun.com/" target="_blank" >Group 8</a>.
               </p>
             </div>
             <script>
@@ -1276,7 +546,193 @@
                     <script src="js/chart.js"></script>
                     <script src="js/map.js"></script>
                     <script src="js/custom.js"></script>
+                    <!-- import axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <!-- Get -->
+    <script>          
+      //get 帳單        
+      async function fetchCItemName(cItems_id) {
+        try {
+          let response = await axios.get(`https://billapi-6373626296ec.herokuapp.com/cItem/${cItems_id}`);
+          return response.data.cItems_name;
+        } catch (error) {
+          console.error('Error fetching cItem name:', error);
+          return ''; // 如果發生錯誤，返回空字符串
+        }
+      }
+      
+      async function fetchData() {
+        try {
+          let response = await axios.get('https://billapi-6373626296ec.herokuapp.com/chargeitem');
+          let tbody = document.querySelector('tbody');
+          tbody.innerHTML = ''; // 清除先前的表格內容
+      
+          for (let i = 0; i < response.data.length; i++) {
+            let expense = response.data[i];
+            let id = expense.charge_item_id;
+            let name = expense.charge_name;
+            let money = expense.price;
+            let year = moment.utc(expense.date).format('YYYY');
+            let month = moment.utc(expense.date).format('MM');
+            let day = moment.utc(expense.date).format('DD');
+      
+            let cItems_name = await fetchCItemName(expense.cItems_id);
+      
+            let item = [id,'', name, cItems_name, year, month, day, money," "];
+            let tr = document.createElement('tr');
+      
+            item.forEach((value, index) => {
+              let td = document.createElement('td');
+              td.innerHTML = value;
+              //隱藏id
+              if (index === 0) {
+                td.style.display = 'none';
+              }
+              tr.appendChild(td);
+            });
+      
+            tbody.appendChild(tr);
+          }
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      }
+      fetchData()
+      
+      
+      // 驗證編輯的所有輸入是否有效的函數
+      function validateInputs(tds) {
+        for (let j = 2; j < tds.length - 1; j++) {                   
+          if(j!=3){                      
+            let input=tds[j].querySelector('input').value
+            if (!input || input.trim() === '') {
+              console.log(input);
+              return false; // 如果有空白輸入，返回 false
+            }
+          }
+          if(j==5){
+            let input = tds[j].querySelector('input').value;
+            let intValue = parseInt(input, 10);
 
+            if (isNaN(intValue) || intValue < 1 || intValue > 12) {
+                console.log(input);
+                return false; // 如果不在 1 到 12 的範圍內，返回 false
+            }
+          } 
+          if(j==6){
+            let input = tds[j].querySelector('input').value;
+            let intValue = parseInt(input, 10);
+
+            if (isNaN(intValue) || intValue < 1 || intValue > 31) {
+                console.log(input);
+                return false; // 如果不在 1 到 31 的範圍內，返回 false
+            }
+          }                                                                                                                 
+          if(j==7){
+            let input = tds[j].querySelector('input').value;
+            let intValue = parseInt(input, 10);
+
+            if (isNaN(intValue) || intValue <= 0) {
+                console.log(input);
+                return false; // 如果不是正整數，返回 false
+            }
+          }                                                                                   
+        }                      
+        return true; 
+      }
+
+      async function initialize() {
+        await getSorc(); // 等待 getSorc 完成
+        updateExpenseJSON(); // getSorc 完成後再執行 updateExpenseJSON
+      }                      
+      initialize(); // 調用初始化函數
+      //get 類別
+      async function getSorc() {
+        try {
+          let response = await axios.get('https://billapi-6373626296ec.herokuapp.com/cItem');
+          let typeList1 = document.getElementById('type_list1');
+      
+          // 清空現有的選項
+          typeList1.innerHTML = '';
+      
+          // 迭代 sorc_Items 並添加到下拉選單
+          response.data.forEach(function (item) {
+            let option = document.createElement('option');
+            option.value = item.cItems_name;
+            option.textContent = item.cItems_name;
+            typeList1.appendChild(option);
+          });
+          typeList1.selectedIndex = 0;
+        } catch (error) {
+          // 錯誤處理
+          console.error('錯誤:', error);
+        }
+      }                    
+      getSorc();
+      
+    </script>
+
+    <!-- post -->
+    
+    <script>
+      //類別視窗
+      let btn=document.querySelector("#show");
+      let infoModal=document.querySelector("#infoModal");
+      let close=document.querySelector("#close");
+      btn.addEventListener("click", function(){
+        infoModal.showModal();
+      })
+      close.addEventListener("click", function(){
+        infoModal.close();
+      })
+      //預設今日
+      var today = new Date();
+      var dd = String(today.getDate()).padStart(2, '0');
+      var mm = String(today.getMonth() + 1).padStart(2, '0');
+      var yyyy = today.getFullYear();
+      today = yyyy + '-' + mm + '-' + dd;
+      document.getElementById("date_picker").value = today;
+
+      //搜尋帳單
+      function searchBill(){
+        // 獲取 input 元素
+        const searchInput = document.getElementById('searchInput');
+
+        // 監聽 input 元素的 input 事件
+        searchInput.addEventListener('input', function () {
+            // 獲取搜索關鍵詞
+            const searchTerm = searchInput.value.toLowerCase();
+
+            // 獲取表格的 tbody 元素
+            const tbody = document.querySelector('tbody');
+
+            const rows = tbody.getElementsByTagName('tr');
+
+            for (let i = 0; i < rows.length; i++) {
+                const row = rows[i];
+                const cells = row.getElementsByTagName('td');
+
+                row.style.display = '';
+                console.log(cells[0].innerText)
+                // 迭代每一個單元格
+                for (let j = 2; j < cells.length; j++) {
+                    const cellText = cells[j].textContent || cells[j].innerText;
+                
+                    // 如果單元格的文本不包含搜索關鍵詞，隱藏該行
+                    if (cellText.toLowerCase().indexOf(searchTerm) === -1) {
+                      row.style.display = 'none';
+                    }else{
+                      row.style.display = '';
+                      break;
+                    }
+                }
+            }
+        });
+      }
+      searchBill();
+    </script>
+    
+    </script>
                     
 
 
