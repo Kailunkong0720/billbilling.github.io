@@ -94,6 +94,7 @@ window.onload = function () {
       .catch(error => {
           console.error('Error fetching income data from API:', error);
       });
+      fetchGoal();
 }
 // Function to calculate total for the current month
 function calculateTotalForCurrentMonth(data) {
@@ -500,13 +501,30 @@ if (mixedChart1 !== null) {
   var randerMixedChart1 = new ApexCharts(mixedChart1, mixedOptions1);
   randerMixedChart1.render();
 }
-
+var goal;
+async function fetchGoal(){
+  try{
+      let response = await axios.get('https://billapi-6373626296ec.herokuapp.com/member');
+      for (let i = 0; i < response.data.length; i++) {
+          if(response.data[i].member_id==1){
+            goal=response.data[i].goal;
+          }
+      }
+  }catch (error) {
+                        // 錯誤處理
+   console.error('錯誤:', error);
+  }
+   //Load_pic();
+  }
+  document.getElementById("goal").innerHTML=goal;
 /*======== 6. RADIAL BAR CHART 01 ========*/
 var radialBarChart1 = document.querySelector("#radial-bar-chart-1");
 var revenue=0;
-var goal=12600;
 for(let i =0;i<profits.length;i++){
-  revenue+=profits[i];
+  if(!isNaN(profits[i])){
+    revenue+=profits[i];
+  }
+
 }
 console.log((revenue/goal)*100)
 document.getElementById("revenue").innerHTML="$"+String(revenue);
@@ -548,8 +566,8 @@ if (radialBarChart1 !== null) {
       type: "solid",
       colors: "#9e6de0",
     },
-    series: [(revenue/goal)*100],
-    labels: ["已達成\n"+String((revenue/goal)*100)+"%"],
+    series: [(revenue/parseInt(goal))*100],
+    labels: ["已達成\n"+String((revenue/parseInt(goal))*100)+"%"],
   };
 
   var randerRadialBar1 = new ApexCharts(radialBarChart1, radialBarOptions1);
