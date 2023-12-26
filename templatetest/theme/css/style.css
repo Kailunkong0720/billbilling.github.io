@@ -17448,3 +17448,27 @@ html[dir=rtl] .sidebar li > a .caret:before {
   font-weight: 500;
 }
 /*# sourceMappingURL=style.css.map */
+#add_goal{
+  width: 5%;
+  position: absolute;
+  left: 94%;
+  top: 85%;
+}
+#button_add:hover::before {
+  position: absolute;
+  left: 94%;
+  top: 80%;
+  color: black;
+  font-size: .8em;
+  background: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  content: '新增目標';
+}
+#tree{
+  display: block;
+  margin: auto;
+  width: 50%;
+  background-color: white;
+  border-radius: 50%;
+}
