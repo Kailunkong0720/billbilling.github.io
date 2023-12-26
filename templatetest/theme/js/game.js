@@ -95,7 +95,7 @@ for(let i =0;i<profits.length;i++){
   }
 
 }
-var userGoal;
+var userGoal=null;
 async function fetchGoal(){
   try{
       let response = await axios.get('https://billapi-6373626296ec.herokuapp.com/member');
@@ -108,16 +108,16 @@ async function fetchGoal(){
                         // 錯誤處理
    console.error('錯誤:', error);
   }
-   //Load_pic();
+   Load_pic();
   }
   function Load_pic(){
-                        
+    console.log(userGoal)                   
     var percent=document.getElementById("tree");
     console.log(percent)
-    var p=rev/userGoal;
+    var p=rev/parseInt(userGoal);
     console.log(rev)
     console.log(p)
-    if(rev == 0||p < 0.25){
+    if(rev == 0||isNaN(userGoal)||p < 0.25){
       percent.src="images/樹苗.png";
     }
     else if(p>=0.25&&p<0.5){
