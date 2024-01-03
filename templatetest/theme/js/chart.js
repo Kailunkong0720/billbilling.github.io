@@ -68,8 +68,8 @@ window.onload = function () {
           fetch('https://billapi-6373626296ec.herokuapp.com/chargeitem')
               .then(response => response.json())
               .then(chargeItemData => {
-                expense_mon_data = updateChartForCurrentYear(chargeItemData);
-                expense_year_data = updateChartForCurrentMon(chargeItemData);
+                expense_mon_data = updateChartForCurrentYear(createMonthlyArray(chargeItemData));
+                expense_year_data = updateChartForCurrentMon(createMonthlyArray(chargeItemData));
                 const totalChargeMon = calculateTotalForCurrentMonth(chargeItemData);
                     const totalChargeYear = calculateTotalForCurrentYear(chargeItemData);
 
@@ -110,7 +110,14 @@ function calculateTotalForCurrentMonth(data) {
   
   return totalForCurrentMonth;
 }
-
+function createMonthlyArray(data) {
+  const monthlyArray = new Array(12).fill(0);
+  data.forEach(item => {
+    const month = new Date(item.date).getMonth();
+    monthlyArray[month] += item.amount;
+  });
+  return monthlyArray;
+}
 // Function to calculate total for the current year
 function calculateTotalForCurrentYear(data) {
   // Get the current year
