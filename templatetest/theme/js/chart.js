@@ -68,8 +68,10 @@ window.onload = function () {
           fetch('https://billapi-6373626296ec.herokuapp.com/chargeitem')
               .then(response => response.json())
               .then(chargeItemData => {
-                expense_mon_data = updateChartForCurrentYear(createMonthlyArray(chargeItemData));
-                expense_year_data = updateChartForCurrentMon(createMonthlyArray(chargeItemData));
+                expense_mon_data = updateChartForCurrentYear(chargeItemData);
+                expense_year_data = updateChartForCurrentMon(chargeItemData);
+                console.log(expense_mon_data);
+                console.log(expense_year_data);
                 const totalChargeMon = calculateTotalForCurrentMonth(chargeItemData);
                     const totalChargeYear = calculateTotalForCurrentYear(chargeItemData);
 
@@ -113,7 +115,7 @@ function calculateTotalForCurrentMonth(data) {
 function createMonthlyArray(data) {
   const monthlyArray = new Array(12).fill(0);
   data.forEach(item => {
-    const month = new Date(item.date).getMonth();
+    const month = new Date(item.date).getMonth() + 1; 
     monthlyArray[month] += item.amount;
   });
   return monthlyArray;
@@ -132,10 +134,19 @@ function calculateTotalForCurrentYear(data) {
 }
 
 function updateChartForCurrentMon(data) {
-  const currentMonth = new Date().getMonth();
-  const dataForCurrentMonth = data.filter(item => new Date(item.date).getMonth() === currentMonth);
-  const dataPricesForCurrentMonth = dataForCurrentMonth.map(item => parseFloat(item.price));
-  return Object.values(dataPricesForCurrentMonth);
+  const currentYear = new Date().getFullYear();
+  const monthlyArray = new Array(12).fill(0);
+
+  data.forEach(item => {
+    const itemYear = new Date(item.date).getFullYear();
+    const itemMonth = new Date(item.date).getMonth();
+    
+    if (itemYear === currentYear) {
+      monthlyArray[itemMonth] += parseFloat(item.price);
+    }
+  });
+
+  return Object.values(monthlyArray);
 }
 
 function updateChartForCurrentYear(data) {
