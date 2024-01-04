@@ -116,10 +116,9 @@ async function fetchGoal(){
     'picture':null
 };
   async function Enter_goal(){
-    var goal = prompt("輸入存款目標", "1000");
+    var goal = prompt("輸入今年存款目標", "1000");
     if(!isNaN(goal)&&goal>0){
     GoalJSON.goal=goal;
-    console.log(GoalJSON.goal)
     AddGoal();
     }
     else{
@@ -139,12 +138,10 @@ async function fetchGoal(){
     console.error('錯誤:', error);
     });
   }
-var clock = setInterval(Load_pic , 1000);
-  function Load_pic(){
-    console.log(userGoal)        
-    console.log(rev)           
+var clock = setInterval(Load_pic , 300);
+  function Load_pic(){      
     var percent=document.getElementById("tree");
-    console.log(percent)
+    //console.log(percent)
     var p=rev/parseInt(userGoal);
     console.log(p)
     if(rev == 0||isNaN(userGoal)||p < 0.25){
@@ -160,4 +157,19 @@ var clock = setInterval(Load_pic , 1000);
       percent.src="images/大樹.jpg"
     }
   }
-  
+/*var btn=document.getElementById("show");
+console.log(btn);
+var infoModal=document.getElementById("infoModel");
+var close=document.getElementById("close");
+btn.addEventListener("click", function(){
+  infoModal.showModal();
+})
+close.addEventListener("click", function(){
+  infoModal.close();
+})*/
+function showModal(){
+  document.getElementById("infoModal").showModal();
+}
+function Close(){
+  document.getElementById("infoModal").close();
+}
