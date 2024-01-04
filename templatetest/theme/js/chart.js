@@ -156,7 +156,12 @@ function updateChartForCurrentYear(data) {
   return Object.values(dataPricesForCurrentYear);
 }
 var goal;
+var date=new Date();
+function showTime(){
+  
+  alert("計算日期從 "+date.getFullYear()+"/1/1 到 "+date.toLocaleDateString())
 
+}
 async function fetchGoal(){
   try{
     let response = await axios.get('https://billapi-6373626296ec.herokuapp.com/members');
@@ -542,7 +547,8 @@ if (mixedChart1 !== null) {
 /*======== 6. RADIAL BAR CHART 01 ========*/
 var radialBarChart1 = document.querySelector("#radial-bar-chart-1");
 var revenue=0;
-for(let i =0;i<profits.length;i++){
+console.log(date.getMonth())
+for(let i =0;i<date.getMonth()+1;i++){
   if(!isNaN(profits[i])){
     revenue+=profits[i];
   }
@@ -550,6 +556,7 @@ for(let i =0;i<profits.length;i++){
 }
 console.log((revenue/goal)*100)
 document.getElementById("revenue").innerHTML="$"+String(revenue);
+
 if (radialBarChart1 !== null) {
   var radialBarOptions1 = {
     chart: {
