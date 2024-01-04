@@ -299,13 +299,15 @@
                     <div class="card card-default">
                       <div class="card-header justify-content-center">
                         <h2>離目標距離</h2>
+                        <button id="inf_btn" onclick="showTime()"><img src="images/info.jpg" id="idx_info2"></button>
                       </div>
                       <div class="card-body pt-0">
                         <div class="chart-wrapper">
                           <div id="radial-bar-chart-1"></div>
                         </div>
                         <div class="radial-bar-chart-footer">
-                          <div class="title-large" id="revenue"> <!--<i class="mdi mdi-arrow-up text-success"></i>--></div>
+                          <div class="title-large rev" id="revenue"></div>
+                          
                           <div class="title-small" id="goal"></div>
                         </div>
                       </div>
@@ -361,6 +363,7 @@
                   </div>  
                
               </div>
+              
             <button id="downloadBtn" onclick="window.print()">列印成PDF檔</button>
           </div>
                          
