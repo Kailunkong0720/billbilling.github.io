@@ -299,6 +299,7 @@
                     <div class="card card-default">
                       <div class="card-header justify-content-center">
                         <h2>離目標距離</h2>
+                        <button id="inf_btn" onclick="showTime()"><img src="images/info.jpg" id="idx_info2"></button>
                       </div>
                       <div class="card-body pt-0">
                         <div class="chart-wrapper">
@@ -548,7 +549,6 @@
                     <script src="js/custom.js"></script>
                     <!-- import axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
     <!-- Get -->
     <script>          
       //get 帳單        
@@ -567,7 +567,7 @@
           let tbody = document.querySelector('tbody');
           tbody.innerHTML = ''; // 清除先前的表格內容
       
-          for (let i = response.data.length-1; i >= 0; i--) {
+          for (let i = 0; i < response.data.length; i++) {
             let income = response.data[i];
             let id = income.income_id;
             let money = income.price;
