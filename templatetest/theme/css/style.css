@@ -17448,7 +17448,7 @@ html[dir=rtl] .sidebar li > a .caret:before {
   font-weight: 500;
 }
 /*# sourceMappingURL=style.css.map */
-#add_goal{
+#add_goal {
   width: 5%;
   position: absolute;
   left: 94%;
@@ -17456,14 +17456,14 @@ html[dir=rtl] .sidebar li > a .caret:before {
 }
 #button_add:hover::before {
   position: absolute;
-  left: 94%;
-  top: 80%;
+  left: 90%;
+  top: 85%;
   color: black;
   font-size: .8em;
   background: #fff;
   padding: 5px;
   border-radius: 5px;
-  content: '新增目標';
+  content: '新增今年目標';
 }
 #tree{
   display: block;
@@ -17471,4 +17471,39 @@ html[dir=rtl] .sidebar li > a .caret:before {
   width: 50%;
   background-color: white;
   border-radius: 50%;
+  left: 50%;
+  top: 50%;
 }
+#info{
+  width: 5%;
+  position: absolute;
+  left: 94%;
+  top: 76%;
+  border-radius: 50%;
+}
+dialog{
+  margin: auto;
+  width: 50%;
+  border: none;
+  box-shadow: 0 2px 6px #ccc;
+  border-radius: 10px;
+}
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+#info_img{
+  width: 10%;
+  border-radius: 50%;
+}
+#close{
+  position: relative;
+  left: 50%;
+}
+#idx_info2{
+  width: 10%;
+}
+#inf_btn{
+  position: absolute;
+  left: 50%;
+}
+
