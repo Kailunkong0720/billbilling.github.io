@@ -320,7 +320,17 @@
                   <div class="col-12">
                     <div class="card card-default">
                       <div class="card-header">
-                        <h2>收入</h2>    
+                        <h2>收入</h2> 
+                        <div class="dropdown">
+                          <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false"> 總覽
+                          </a>
+                          <div class="dropdown-menu dropdown-menu-right no-print" aria-labelledby="dropdownMenuLink1">
+                            <a class="dropdown-item" onclick="changeOverview('總覽')">總覽</a>
+                            <a class="dropdown-item" onclick="changeOverview('本月')">本月</a>
+                            <a class="dropdown-item" onclick="changeOverview('本日')">本日</a>
+                          </div>                           
+                        </div>    
                         <div class="dropdown">
                           <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false"> 收入
@@ -589,7 +599,7 @@
               }
               tr.appendChild(td);
             });
-      
+            changeOverview('總覽');
             tbody.appendChild(tr);
           }
         } catch (error) {
@@ -630,6 +640,58 @@
         }
       }                    
       getSorc();
+      //依月日顯示
+      function changeOverview(selectedItem) {
+        // 將總覽的文本更改為所選擇的項目
+        document.getElementById('dropdownMenuLink').innerText = selectedItem;
+        // 取得當前日期
+        let currentDate = new Date();
+        let currentYear = currentDate.getFullYear();
+        let currentMonth = currentDate.getMonth() + 1;
+        let currentDay = currentDate.getDate();
+
+        // 獲取表格的 tbody 元素
+        const tbody = document.querySelector('tbody');
+        const rows = tbody.getElementsByTagName('tr');
+        let key="All";
+        let searchTerm;
+        if(selectedItem=="本月"){
+          key="m";
+        }
+        if(selectedItem=="本日"){
+          key="d";
+        }
+        for (let i = 0; i < rows.length; i++) {
+            const row = rows[i];
+            const cells = row.getElementsByTagName('td');
+            row.style.display = '';
+            
+            if(key=="m"){
+              const yearText = cells[3].textContent || cells[3].innerText;
+              const monthText = cells[4].textContent || cells[4].innerText;     
+              // 如果不符，隱藏該行
+              if (yearText.toLowerCase()==currentYear && monthText.toLowerCase()==currentMonth) {
+                row.style.display ='';               
+              }else{
+                row.style.display = 'none';
+              }
+            }                 
+            if(key=="d"){
+              const yearText = cells[3].textContent || cells[3].innerText;
+              const monthText = cells[4].textContent || cells[4].innerText;
+              const dayText = cells[5].textContent || cells[5].innerText;     
+
+              // 如果不符，隱藏該行
+              if (yearText.toLowerCase()==currentYear && monthText.toLowerCase()==currentMonth && dayText.toLowerCase()==currentDay) {
+                row.style.display ='';               
+              }else{
+                row.style.display = 'none';
+              }
+            }
+            
+        }
+        console.log(key)
+      }
     </script>
 
 
