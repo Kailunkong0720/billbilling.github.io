@@ -37,21 +37,31 @@ async function fetchUser(){
       console.log(name)
       var password=document.getElementById("newPassword").value
       console.log(password)
+      var conpassword=document.getElementById("conPassword").value
       if(name!=""){
         UserJson.acc_name=name;
         console.log(UserJson.acc_name)
+        Change();
       } 
-      if(password!=""){
+      if(password!=""&&conpassword==password){
         UserJson.password=password;
+        Change();
       } 
-      Change();
+      else if(password!=""&&conpassword!=password){
+        alert("請重新確認密碼")
+      }
+      document.getElementById("userName").value="";
+      document.getElementById("newPassword").value="";
+      document.getElementById("oldpassword").value="";
+      document.getElementById("conPassword").value="";
+      
     }
     async function Change(){
     // 在這裡使用更新後的 expenseJSON 進行 POST 請求
       axios.put('https://billapi-6373626296ec.herokuapp.com/members/1', UserJson)
       .then(function (response) {
       // 成功處理回應
-      fetchGoal();
+      fetchUser();
       console.log('成功:', response.data);
       })
       .catch(function (error) {
