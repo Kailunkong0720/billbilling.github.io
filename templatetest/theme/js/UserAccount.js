@@ -21,7 +21,7 @@ async function fetchUser(){
                           // 錯誤處理
      console.error('錯誤:', error);
     }
-   
+    document.getElementById("acc_name").innerHTML=userName;
     }
     let UserJson={
       'member_id':1,
@@ -68,4 +68,5 @@ async function fetchUser(){
       // 錯誤處理
       console.error('錯誤:', error);
       });
+      document.getElementById("acc_name").innerHTML=UserJson.acc_name
     }
